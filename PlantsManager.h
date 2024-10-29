@@ -22,6 +22,7 @@ public:
     void performRoutineMaintenance();
     void changeState(const std::string& newState);
     void fixPlant();
+    void push();
 };
 
 #endif  // PlantsManager_h
