@@ -30,8 +30,10 @@ public:
     ResidentialBuilding* createEstate() const override { return nullptr; }
     IndustrialBuilding* createFactory() const override { return nullptr; }
     IndustrialBuilding* createWarehouse() const override { return nullptr; }
+    IndustrialBuilding* createPlant() const override { return nullptr;}
     Landmark* createPark() const override { return nullptr; }
     Landmark* createMonument() const override { return nullptr; }
+    Landmark* createCenters() const override { return nullptr;}
 };
 
 #endif
