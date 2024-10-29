@@ -1,6 +1,6 @@
 // CommericlalBuildingFactory.h
 #ifndef COMMERCIALBUILDINGFACTORY_H
-#define COMMERCIALIALBUILDINGFACTORY_H
+#define COMMERCIALBUILDINGFACTORY_H
 
 #include "BuildingFactory.h"
 #include "CommercialBuildings.h"
