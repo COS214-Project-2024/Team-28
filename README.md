@@ -3,13 +3,13 @@ Team-28's description
 
 
 TO DO BUILDING TASK:
-  make estate compised of houses and flates already created
+  1.make estate compised of houses and flates already created
     Add House* a, Flates* TownHouse* to Estate;
-  make malls comprised of shops and offices;
+  2.make malls comprised of shops and offices;
     Add Shops * nad Offices* private variables to Mall;
-  remove all getAddress() functions
-  add functionality to handl enew private memebers of building type
-  
+  3. remove all getAddress() functions
+  4. add functionality to handl enew private memebers of building type
+  5.Create INDUCTRIALFACTORY.h AND INDUCTRIALBUILDINGS.h;
 
 
 MAkeFIle:
