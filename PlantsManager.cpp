@@ -1,28 +1,44 @@
-// #include <exception>
-// using namespace std;
 
-// #include "PlantsManager.h"
-// #include "Plant.h"
-// //#include "PlantStateHandler.h"
-// #include "CityManager.h"
+#include "PlantsManager.h"
+#include <iostream>
 
-// void PlantsManager::initiateFaultHandling(String aFaultType) {
-// 	throw "Not yet implemented";
-// }
+// Attach an observer to the list of observers
+void PlantsManager::attach(Observer* observer) {
+ 
+}
 
-// void PlantsManager::restorePlantOperations() {
-// 	throw "Not yet implemented";
-// }
+// Detach an observer from the list of observers
+void PlantsManager::detach(Observer* observer) {
+  
+}
 
-// void PlantsManager::performRoutineMaintenance() {
-// 	throw "Not yet implemented";
-// }
+// Notify all attached observers of a state change
+void PlantsManager::notify() {
+  
+}
 
-// void() PlantsManager::changeState(String aNewState) {
-// 	throw "Not yet implemented";
-// }
+// Handle a specific type of fault by initiating fault-handling procedures
+void PlantsManager::initiateFaultHandling(const std::string& faultType) {
+  
+}
 
-// void PlantsManager::fixtPlant() {
-// 	throw "Not yet implemented";
-// }
+// Restore plant operations after maintenance or fault handling
+void PlantsManager::restorePlantOperations() {
+  
+}
 
+// Perform routine maintenance on the plant
+void PlantsManager::performRoutineMaintenance() {
+   
+}
+
+// Change the plant's state based on a new state string
+void PlantsManager::changeState(const std::string& newState) {
+   
+}
+
+// Fix the plant, reset fault state, and notify observers
+void PlantsManager::fixPlant() {
+   
+}
+>>>>>>> Stashed changes

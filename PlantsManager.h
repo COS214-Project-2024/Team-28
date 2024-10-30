@@ -1,28 +1,37 @@
 #ifndef PlantsManager_h
 #define PlantsManager_h
 
-#include <string>    // Include the string header for std::string
+#include <string>    
 #include "CityManager.h"
 
 class Plants;
 class PlantStateHandler;
 
+enum class PlantState {
+    Operational,
+    FaultActive,
+    UnderMaintenance,
+    Fixed
+};
 class PlantsManager : public CityManager {
+
 private:
-    std::string state;
-    int capacity;
-    int operationHours;
+    PlantState state;
+      std::vector<Observer*> observers;
+     bool faultActive;
 
 public:
-    // Plants* unnamed_Plants;
-    // PlantStateHandler* unnamed_PlantStateHandler;
+    void attach(Observer* observer);
+    void detach(Observer* observer);
 
+    void notify();
+    
     void initiateFaultHandling(const std::string& faultType);
     void restorePlantOperations();
     void performRoutineMaintenance();
     void changeState(const std::string& newState);
     void fixPlant();
-    void push();
+    
 };
 
 #endif  // PlantsManager_h
