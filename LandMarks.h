@@ -11,7 +11,7 @@
 
 class Park: public Landmark{
     
-     public:
+    public:
         Park():Landmark(){
             this->address = "";
             this->nameOfPark = "";
