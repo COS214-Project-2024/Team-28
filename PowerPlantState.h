@@ -7,6 +7,7 @@ private:
     /* data */
 public:
     PowerPlantState(/* args */);
+    virtual void handlePowerState() = 0;
     ~PowerPlantState();
 };
 #endif

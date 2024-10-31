@@ -1,0 +1,15 @@
+1. PowerPlantState
+    - Changed all derived classes named derived to ParentClassOperationalState e.g Operational class inheriting from PowerPlantState is now named PowerPlantOperatonalState
+    - added int overloadThreshold to OVerload class
+    - added  Overload *overload; and bool isOperational to PowerPlantOperatonalState
+    - implemented an aggregation relationship between Overload and PowerPlantOperatonalState. PowerPlantOperatonalState has an Overload obj so that when implementig the handle method it only does something if the overloadThreshold is violated isOperational attribute is set to false
+    - added PowerPlantOperatonalState *operationalState to Shutdown class
+    - implemented an aggregation relationship between PowerPlantOperatonalState and Shutdown.
+
+2. WaterPlantState
+    - added bool isContaminated; to Contaminated class
+    - added aggregation relationship between Contaminated class and Treatment class
+    - added bool isTreating; and WaterPlantContaminatedState *contaminatedState; to WaterPlantRunningState class and an aggregation relationship between WaterPlantTreatmentState class and WaterPlantRunningState
+
+3. WastePlantState
+    - replaced PartialState with WastePlantMaintenanceState

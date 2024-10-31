@@ -8,6 +8,7 @@ private:
 public:
     SewagePlantState(/* args */);
     ~SewagePlantState();
+    virtual void handleSewageState() = 0;
 };
 #endif
 

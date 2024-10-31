@@ -4,7 +4,8 @@
 #include <iostream>
 #include "PlantsManager.h"
 
-class PowerPlantObserver : public Observer {
+class PowerPlantObserver : public PlantsManager
+{
 public:
     void update() override;
 };

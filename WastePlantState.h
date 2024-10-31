@@ -9,6 +9,7 @@ private:
 public:
     WastePlantState(/* args */);
     ~WastePlantState();
+    virtual void handleWasteState() = 0;
 };
 #endif
 
