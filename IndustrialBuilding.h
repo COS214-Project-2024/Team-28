@@ -1,4 +1,3 @@
-// IndustrialBuilding.h
 #ifndef INDUSTRIALBUILDING_H
 #define INDUSTRIALBUILDING_H
 
@@ -6,8 +5,7 @@
 
 class IndustrialBuilding {
 public:
-
-    // Pure virtual methods
+    virtual ~IndustrialBuilding() = default;
     virtual void construct() = 0;
     virtual void maintain() = 0;
     virtual void startProduction() = 0;
@@ -17,5 +15,4 @@ public:
     virtual int getNumberOfWorkers() const = 0;
     virtual void print() const = 0;
 };
-
 #endif // INDUSTRIALBUILDING_H

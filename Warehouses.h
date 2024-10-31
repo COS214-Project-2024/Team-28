@@ -2,103 +2,80 @@
 #define WAREHOUSES_H
 
 #include <vector>
+#include <algorithm>
 #include <iostream>
 #include "IndustrialBuilding.h"
-#include "Materials.h"
 
 class Warehouses : public IndustrialBuilding {
 private:
-    std::vector<Steel*> steelStock;
-    std::vector<Concrete*> concreteStock;
-    std::vector<Wood*> woodStock;
-    std::string warehouseLocation;
+    std::string warehouseName;
     std::vector<std::string> workers;
-    int capacity;
-    bool isReady;
-    bool storageStatus;
-    int lastInventoryCheck;
+    std::vector<std::string> inventory;
+    bool isOperational;
+    bool productionStatus;
+    int maintenanceCount;
     int numberOfWorkers;
 
 public:
-    Warehouses(const std::string& location = "Default Location") 
-        : capacity(1000), 
-          isReady(false), 
-          storageStatus(true),
-          lastInventoryCheck(0),
-          numberOfWorkers(0),
-          warehouseLocation(location) {}
-    
-    ~Warehouses() {
-        for (auto* steel : steelStock) delete steel;
-        for (auto* concrete : concreteStock) delete concrete;
-        for (auto* wood : woodStock) delete wood;
-    }
+    explicit Warehouses(const std::string& name = "Default Warehouse") 
+        : warehouseName(name)
+        , isOperational(false)
+        , productionStatus(false)
+        , maintenanceCount(0)
+        , numberOfWorkers(0) {}
 
     void construct() override {
-        std::cout << "Beginning warehouse construction at " << warehouseLocation << "..." << std::endl;
-        
-        try {
-            std::cout << "Phase 1: Preparing foundation..." << std::endl;
-            std::cout << "Phase 2: Erecting support structures..." << std::endl;
-            std::cout << "Phase 3: Installing storage systems..." << std::endl;
-            
-            std::cout << "\nSetting up storage sections:" << std::endl;
-            std::cout << "- Steel storage area: Capacity " << capacity/3 << " units" << std::endl;
-            std::cout << "- Concrete storage area: Capacity " << capacity/3 << " units" << std::endl;
-            std::cout << "- Wood storage area: Capacity " << capacity/3 << " units" << std::endl;
-            
-            isReady = true;
-            std::cout << "\nWarehouse construction completed. Ready for storage operations." << std::endl;
-        }
-        catch (const std::exception& e) {
-            std::cerr << "Warehouse construction failed: " << e.what() << std::endl;
-            isReady = false;
-        }
+        std::cout << "Constructing new warehouse: " << warehouseName << "..." << std::endl;
+        std::cout << "Setting up storage areas..." << std::endl;
+        std::cout << "Installing inventory management systems..." << std::endl;
+        std::cout << "Setting up loading docks..." << std::endl;
+        isOperational = true;
+        std::cout << "Warehouse construction completed. Status: Operational" << std::endl;
     }
 
     void maintain() override {
-        if (!isReady) {
-            std::cout << "Cannot maintain: Warehouse is not ready" << std::endl;
+        if (!isOperational) {
+            std::cout << "Cannot maintain: Warehouse is not operational" << std::endl;
             return;
         }
 
-        lastInventoryCheck++;
-        std::cout << "\nPerforming warehouse maintenance #" << lastInventoryCheck << std::endl;
-        
-        std::cout << "Current inventory levels:" << std::endl;
-        std::cout << "- Steel: " << steelStock.size() << " units" << std::endl;
-        std::cout << "- Concrete: " << concreteStock.size() << " units" << std::endl;
-        std::cout << "- Wood: " << woodStock.size() << " units" << std::endl;
-        
-        int totalItems = steelStock.size() + concreteStock.size() + woodStock.size();
-        if (totalItems > capacity * 0.9) {
-            std::cout << "\nWARNING: Warehouse at " << (totalItems * 100 / capacity) 
-                     << "% capacity. Consider expansion." << std::endl;
-        }
+        maintenanceCount++;
+        std::cout << "\nPerforming warehouse maintenance check #" << maintenanceCount << std::endl;
+        std::cout << "1. Checking storage conditions..." << std::endl;
+        std::cout << "2. Inspecting security systems..." << std::endl;
+        std::cout << "3. Verifying ventilation..." << std::endl;
     }
 
     void startProduction() override {
-        std::cout << "Warehouses do not support production. Only storage operations are available.\n";
+        if (!isOperational) {
+            std::cout << "Cannot start operations: Warehouse is not operational" << std::endl;
+            return;
+        }
+        productionStatus = true;
+        std::cout << "Warehouse operations started at: " << warehouseName << std::endl;
     }
 
     void stopProduction() override {
-        std::cout << "Warehouses do not support production.\n";
+        if (productionStatus) {
+            productionStatus = false;
+            std::cout << "Warehouse operations stopped at: " << warehouseName << std::endl;
+        }
     }
 
     void hireWorker(const std::string& workerName) override {
         workers.push_back(workerName);
         numberOfWorkers++;
-        std::cout << "Worker " << workerName << " hired at warehouse: " << warehouseLocation << std::endl;
+        std::cout << "Worker " << workerName << " hired at warehouse: " << warehouseName << std::endl;
     }
 
     void allocateJobs() override {
-        if (!isReady) {
-            std::cout << "Cannot allocate jobs: Warehouse is not ready" << std::endl;
+        if (!isOperational) {
+            std::cout << "Cannot allocate jobs: Warehouse is not operational" << std::endl;
             return;
         }
-        std::cout << "Allocating storage tasks to workers at warehouse: " << warehouseLocation << std::endl;
+        std::cout << "Allocating warehouse tasks to workers at: " << warehouseName << std::endl;
         for (const auto& worker : workers) {
-            std::cout << "Storage task allocated to: " << worker << std::endl;
+            std::cout << "Assigning storage management to: " << worker << std::endl;
         }
     }
 
@@ -107,16 +84,39 @@ public:
     }
 
     void print() const override {
-        std::cout << "Warehouse: " << warehouseLocation 
-                 << "\nOperational Status: " << (isReady ? "Ready" : "Not Ready")
+        std::cout << "Warehouse: " << warehouseName 
+                 << "\nOperational Status: " << (isOperational ? "Operational" : "Non-operational")
                  << "\nNumber of Workers: " << numberOfWorkers 
-                 << "\nStorage Status: " << (storageStatus ? "Active" : "Inactive")
-                 << "\nInventory Checks: " << lastInventoryCheck << std::endl;
+                 << "\nOperation Status: " << (productionStatus ? "Active" : "Inactive")
+                 << "\nMaintenance Count: " << maintenanceCount 
+                 << "\nInventory Items: " << inventory.size() << std::endl;
     }
 
-    bool isWarehouseReady() const { return isReady; }
-    int getCurrentCapacity() const { return capacity; }
-    int getLastInventoryCheck() const { return lastInventoryCheck; }
+    // Warehouse-specific methods
+    void addInventory(const std::string& item) {
+        if (isOperational) {
+            inventory.push_back(item);
+            std::cout << "Added item to inventory: " << item << std::endl;
+        } else {
+            std::cout << "Cannot add inventory: Warehouse is not operational" << std::endl;
+        }
+    }
+
+    bool removeInventory(const std::string& item) {
+        if (!isOperational) {
+            std::cout << "Cannot remove inventory: Warehouse is not operational" << std::endl;
+            return false;
+        }
+
+        auto it = std::find(inventory.begin(), inventory.end(), item);
+        if (it != inventory.end()) {
+            inventory.erase(it);
+            std::cout << "Removed item from inventory: " << item << std::endl;
+            return true;
+        }
+        std::cout << "Item not found in inventory: " << item << std::endl;
+        return false;
+    }
 };
 
 #endif // WAREHOUSES_H

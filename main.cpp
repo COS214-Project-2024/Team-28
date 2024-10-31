@@ -62,10 +62,8 @@ int main() {
 
     printSectionHeader("INDUSTRIAL");
     
-    // Create industrial factory
     IndustrialFactory industrialFactory;
     
-    // Test Factory Creation and Operations
     std::cout << "\n=== Testing Factory Creation and Basic Operations ===\n";
     IndustrialBuilding* steelFactory = industrialFactory.createFactory();
     
@@ -85,35 +83,27 @@ int main() {
     steelFactory->maintain();  // Third maintenance check - should trigger repairs
     steelFactory->stopProduction();
     
-    // Print factory status
     std::cout << "\n=== Factory Status ===\n";
     steelFactory->print();
     
-    // Test Warehouse Creation and Operations
     std::cout << "\n=== Testing Warehouse Creation and Operations ===\n";
     IndustrialBuilding* warehouse = industrialFactory.createWarehouse();
     
-    // Test warehouse construction
     warehouse->construct();
     
-    // Test warehouse worker management
     warehouse->hireWorker("Alice Johnson");
     warehouse->hireWorker("Charlie Brown");
     warehouse->allocateJobs();
     
-    // Test warehouse maintenance and inventory
     warehouse->maintain();
     warehouse->maintain();
     
-    // Test warehouse production methods (should show appropriate messages)
     warehouse->startProduction();
     warehouse->stopProduction();
     
-    // Print warehouse status
     std::cout << "\n=== Warehouse Status ===\n";
     warehouse->print();
     
-    // Test error handling by trying operations before construction
     std::cout << "\n=== Testing Error Handling ===\n";
     IndustrialBuilding* newFactory = industrialFactory.createFactory();
     newFactory->startProduction();  // Should fail because not constructed

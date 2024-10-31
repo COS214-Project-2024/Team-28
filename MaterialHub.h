@@ -15,23 +15,47 @@ public:
 // Concrete MaterialHub builders
 class SteelBuilder : public MaterialHub {
 public:
-    Steel* createSteel() override;
-    Concrete* createConcrete() override;
-    Wood* createWood() override;
+    Steel* createSteel() override {
+        return new SteelMaterial();
+    }
+    
+    Concrete* createConcrete() override {
+        return new ConcreteMaterial();
+    }
+    
+    Wood* createWood() override {
+        return new WoodMaterial();
+    }
 };
 
 class ConcreteBuilder : public MaterialHub {
 public:
-    Steel* createSteel() override;
-    Concrete* createConcrete() override;
-    Wood* createWood() override;
+    Steel* createSteel() override {
+        return new SteelMaterial();
+    }
+    
+    Concrete* createConcrete() override {
+        return new ConcreteMaterial();
+    }
+    
+    Wood* createWood() override {
+        return new WoodMaterial();
+    }
 };
 
 class WoodMaker : public MaterialHub {
 public:
-    Steel* createSteel() override;
-    Concrete* createConcrete() override;
-    Wood* createWood() override;
+    Steel* createSteel() override {
+        return new SteelMaterial();
+    }
+    
+    Concrete* createConcrete() override {
+        return new ConcreteMaterial();
+    }
+    
+    Wood* createWood() override {
+        return new WoodMaterial();
+    }
 };
 
 #endif // MATERIALHUB_H
