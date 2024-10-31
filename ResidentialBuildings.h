@@ -22,7 +22,7 @@ class House: public ResidentialBuilding{
             this->numberOfResidents = numberOfResidents;
         }
         float getBuildCost(){
-            return this->buildingCost;          // return building cost for comparisons 
+            return this->buildingCost;         // return building cost for comparisons 
         }
         ~House() = default;
         int getNumberOfResidents(){      //Get numberOfResidents for citizen count 

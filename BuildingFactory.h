@@ -29,10 +29,11 @@ public:
     virtual IndustrialBuilding* createPlant() const = 0;
 
     //LandMarks 
-
     virtual Landmark* createPark() const = 0;
     virtual Landmark* createMonument() const = 0;
     virtual Landmark* createCenters() const = 0;
+
+    //Industrials
 };
 
 

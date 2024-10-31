@@ -2,6 +2,7 @@
 #define BUILDING_H
 
 #include <iostream>
+#include "IndustrialBuilding.h"
 //ABSTRACT PRODUCTS
 
 class Building{ //
@@ -23,13 +24,7 @@ public:
     virtual ~CommercialBuilding() = default;
 };
 
-
-class IndustrialBuilding : public Building {
-public:
-    virtual ~IndustrialBuilding() = default;
-};
-
-
+// IndustrialBuilding removed here - on its own header file.
 class Landmark : public Building {
 public:
     virtual ~Landmark() = default;
