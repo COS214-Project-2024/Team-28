@@ -13,7 +13,7 @@ public:
     ~PowerPlantShutdownState() override = default;
 
     void handleState(Plant* plant) override;
-    std::string getStateName()  override; // Added const
+    std::string getStateName() override; // Added const
 };
 
 #endif // POWERPLANTSHUTDOWNSTATE_H

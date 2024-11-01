@@ -13,6 +13,6 @@ public:
     ~WastePlantOperationalState();
     void setOperational(bool operational);
     virtual void handleState(Plant* plant) override;
-    virtual std::string getStateName() const override;
+    virtual std::string getStateName() override;
 };
 #endif

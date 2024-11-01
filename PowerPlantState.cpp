@@ -3,10 +3,15 @@
 
 PowerPlantState::PowerPlantState(/* args */)
 {
-    isOperational = true;
+    //isOperational = true;
 }
 
-void PowerPlantState::handleState()
+void PowerPlantState::handleState(Plant* plant)
 {
-    handlePowerState();
+    //handlePowerState();
+}
+
+std::string PowerPlantState::getStateName()
+{
+    return "PowerPlantState";
 }

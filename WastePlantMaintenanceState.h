@@ -12,6 +12,6 @@ public:
     ~WastePlantMaintenanceState();
   //  void handleWasteState() override;
      void handleState(Plant* plant) override;
-    std::string getStateName() const override { return "PartialState"; }
+    std::string getStateName() override { return "PartialState"; }
 };
 #endif

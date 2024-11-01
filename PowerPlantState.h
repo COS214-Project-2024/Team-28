@@ -8,8 +8,8 @@ class PowerPlantState: public PlantState
 private:
 public:
     PowerPlantState() = default;
-    virtual void handleState(Plant* plant) = 0;
-    virtual std::string getStateName()= 0; 
+    void handleState(Plant* plant) override;
+    std::string getStateName() override; 
     virtual ~PowerPlantState() = default;
 };
 
