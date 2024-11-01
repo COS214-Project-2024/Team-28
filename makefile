@@ -7,8 +7,9 @@ SRCS = main.cpp Plant.cpp PlantsManager.cpp WastePlant.cpp \
        WastePlantObserver.cpp PowerPlant.cpp PowerPlantObserver.cpp \
        SewagePlantObserver.cpp WaterPlantObserver.cpp \
        PowerPlantOperationalState.cpp PowerPlantOverloadState.cpp \
-       PowerPlantShutdown.cpp WastePlantState.cpp SewagePlantState.cpp \
-       WaterPlantState.cpp
+       PowerPlantShutdownState.cpp PowerPlantState.cpp PlantState.cpp \
+       WastePlantState.cpp SewagePlantState.cpp WastePlantMaintenanceState.cpp \
+       WastePlantOperationalState.cpp WastePlantShutdownState.cpp CityManager.cpp
 
 # Corresponding object files
 OBJS = $(SRCS:.cpp=.o)

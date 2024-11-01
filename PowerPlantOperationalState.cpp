@@ -9,3 +9,7 @@ void PowerPlantOperationalState::handleState(Plant* plant) {
 std::string PowerPlantOperationalState::getStateName() {
     return "Operating";
 }
+
+PowerPlantOperationalState::~PowerPlantOperationalState() {
+    // Destructor implementation
+}

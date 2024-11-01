@@ -4,3 +4,7 @@ using namespace std;
 PlantState::PlantState(/* args */)
 {
 }
+
+PlantState::~PlantState()
+{
+}

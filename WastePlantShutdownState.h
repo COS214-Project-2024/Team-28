@@ -8,7 +8,7 @@ private:
     bool isOperational;
 
 public:
-    WastePlantShutdownState(){};
+    WastePlantShutdownState();
    ~WastePlantShutdownState();
     WastePlantShutdownState(WastePlantOperationalState *operationalState);
     virtual void handleState(Plant* plant) override;

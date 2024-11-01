@@ -7,9 +7,7 @@ class WastePlantOperationalState : public WastePlantState
 private:
     bool isOperational;
 public:
-    WastePlantOperationalState(/* args */){
-        
-    };
+    WastePlantOperationalState(/* args */);
     ~WastePlantOperationalState();
     void setOperational(bool operational);
     virtual void handleState(Plant* plant) override;

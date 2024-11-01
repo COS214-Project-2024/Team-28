@@ -9,7 +9,8 @@ class Plant;
 
 class PlantState {
 public:
-    virtual ~PlantState() = default;
+    PlantState();
+    virtual ~PlantState();
     virtual void handleState(Plant* plant) = 0;
     virtual std::string getStateName() = 0;
 };

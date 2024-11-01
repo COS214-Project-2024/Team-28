@@ -9,8 +9,8 @@
 class PowerPlantShutdownState : public PowerPlantState
 {
 public:
-    PowerPlantShutdownState() = default;
-    ~PowerPlantShutdownState() override = default;
+    PowerPlantShutdownState();
+    ~PowerPlantShutdownState() override ;
 
     void handleState(Plant* plant) override;
     std::string getStateName() override; // Added const

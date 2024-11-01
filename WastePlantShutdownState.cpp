@@ -10,3 +10,13 @@ void WastePlantShutdownState::handleState(Plant* plant) {
 std::string WastePlantShutdownState::getStateName() {
     return "Shutdown";
 }
+
+#include "WastePlantShutdownState.h"
+
+WastePlantShutdownState::WastePlantShutdownState() {
+    // Constructor implementation
+}
+
+WastePlantShutdownState::~WastePlantShutdownState() {
+    // Destructor implementation
+}
