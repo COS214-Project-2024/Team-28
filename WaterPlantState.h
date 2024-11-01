@@ -1,7 +1,8 @@
 #ifndef WATERPLANTSTATE_H
 #define WATERPLANTSTATE_H
+#include "PlantState.h"
 
-class WaterPlantState
+class WaterPlantState: public PlantState
 {
 private:
     /* data */

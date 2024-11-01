@@ -15,3 +15,8 @@
 
 3. WastePlantState
     - replaced PartialState with WastePlantMaintenanceState
+
+4. Plant
+    - changed private attributes to protected
+
+5. Added PlantState that will be the base class for PowerPlantState, WaterPlantState etc

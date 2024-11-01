@@ -1,7 +1,8 @@
 #ifndef SEWAGEPLANTSTATE_H
 #define SEWAGEPLANTSTATE_H
+#include "PlantState.h"
 
-class SewagePlantState
+class SewagePlantState: public PlantState
 {
 private:
     /* data */

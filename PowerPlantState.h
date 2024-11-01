@@ -1,11 +1,11 @@
 
 #ifndef POWERPLANTSTATE_H
 #define POWERPLANTSTATE_H
-
 #include "PlantState.h"
 
-class PowerPlantState : public PlantState
+class PowerPlantState: public PlantState
 {
+private:
 public:
     PowerPlantState() = default;
     virtual void handleState(Plant* plant) = 0;

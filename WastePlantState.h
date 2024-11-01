@@ -1,6 +1,7 @@
 // WastePlantState.h
 #ifndef WASTEPLANTSTATE_H
 #define WASTEPLANTSTATE_H
+#include "PlantState.h"
 
 #include "PlantState.h"
 
