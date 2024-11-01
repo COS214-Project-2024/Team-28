@@ -1,24 +1,13 @@
+// WastePlantState.h
 #ifndef WASTEPLANTSTATE_H
 #define WASTEPLANTSTATE_H
 
-class WastePlantState
-{
-private:
+#include "PlantState.h"
 
-    /* data */
+class WastePlantState : public PlantState {
 public:
-    WastePlantState(/* args */);
-    ~WastePlantState();
+    virtual ~WastePlantState() = default;
+    virtual void handleState(Plant* plant) override = 0;
 };
-#endif
 
-
-// WastePlantState::WastePlantState(/* args */)
-// {
-// }
-
-
-// WastePlantState::~WastePlantState()
-// {
-// }
-
+#endif // WASTEPLANTSTATE_H

@@ -1,12 +1,24 @@
-#ifndef CityManager_H
-#define CityManager_H
+// CityManager.h
+#ifndef CITYMANAGER_H
+#define CITYMANAGER_H
 
-class CityManager
-{
-private:
-    /* data */
+#include <string>
+
+class CityManager {
 public:
-    CityManager(/* args */);
-    ~CityManager();
+    CityManager(const std::string& managerName)
+        : name(managerName) {}
+
+    virtual ~CityManager() = default;
+    virtual void reportStatus() const = 0;
+    std::string getName() const { return name; }
+     
+protected:
+    std::string name;
+    // double electricityUsage ;
+    // double waterUsage;
+    // double cityWaste;
+    // double citySewage;
 };
-#endif
+
+#endif =

@@ -1,37 +1,37 @@
-#ifndef PlantsManager_h
-#define PlantsManager_h
+// PlantsManager.h
+#ifndef PLANTSMANAGER_H
+#define PLANTSMANAGER_H
 
-#include <string>    
-#include "CityManager.h"
+#include <string>
+#include <vector>
 
-class Plants;
-class PlantStateHandler;
+// Forward declaration of Plant and PlantState
+class Plant;
+class PlantState;
 
-enum class PlantState {
-    Operational,
-    FaultActive,
-    UnderMaintenance,
-    Fixed
-};
-class PlantsManager : public CityManager {
-
-private:
-    PlantState state;
-      std::vector<Observer*> observers;
-     bool faultActive;
-
+class PlantsManager {
 public:
-    void attach(Observer* observer);
-    void detach(Observer* observer);
+    PlantsManager(const std::string& name) : name(name) {}
+    virtual ~PlantsManager() {}
 
-    void notify();
-    
-    void initiateFaultHandling(const std::string& faultType);
-    void restorePlantOperations();
-    void performRoutineMaintenance();
-    void changeState(const std::string& newState);
-    void fixPlant();
-    
+    void attach(Plant* plant);
+    void detach(Plant* plant);
+
+    // Pure virtual functions to be implemented by derived classes
+    virtual void update(Plant* plant, PlantState* state) = 0;
+    virtual void initiateFaultHandling(const std::string& faultType) = 0;
+    virtual void restorePlantOperations() = 0;
+    virtual void performRoutineMaintenance(Plant* plant) = 0;
+    virtual void changeState(Plant* plant, const std::string& newState) = 0;
+    virtual void reportStatus() const = 0;
+    virtual void allocateResources() = 0;
+
+    // Public accessor for manager's name
+    std::string getName() const { return name; }
+
+protected:
+    std::string name;
+    std::vector<Plant*> plants;
 };
 
-#endif  // PlantsManager_h
+#endif // PLANTSMANAGER_H

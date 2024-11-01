@@ -1,20 +1,17 @@
+// Operational.h
 #ifndef OPERATIONAL_H
 #define OPERATIONAL_H
-#include "PowerPlantState.h"
+#include "PlantState.h"
+#include <iostream>
 
-class Operational : public PowerPlantState
-{
-private:
-    /* data */
+class Operational : public PlantState {
 public:
-    Operational(/* args */);
-    ~Operational();
-};
-#endif
-Operational::Operational(/* args */)
-{
-}
+    
+    virtual ~Operational() = default;
+    
 
-Operational::~Operational()
-{
-}
+    virtual void handleState(Plant* plant) override;
+    virtual std::string getStateName() const override;
+};
+
+#endif // OPERATIONAL_H

@@ -1,20 +1,17 @@
+// PlantState.h
 #ifndef PLANTSTATE_H
 #define PLANTSTATE_H
+
 #include <string>
 
-class PlantState
-{
-private:
-    /* data */
-public:
-    PlantState(/* args */);
-    ~PlantState();
-};
-#endif
-PlantState::PlantState(/* args */)
-{
-}
+// Forward declaration
+class Plant;
 
-PlantState::~PlantState()
-{
-}
+class PlantState {
+public:
+    virtual ~PlantState() = default;
+    virtual void handleState(Plant* plant) = 0;
+    virtual std::string getStateName() const = 0;
+};
+
+#endif // PLANTSTATE_H

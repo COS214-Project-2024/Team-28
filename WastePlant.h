@@ -1,22 +1,45 @@
-#ifndef WASSTEPLANT_H
-#define WASSTEPLANT_H
-#include <string>
-#include "Plant.h"
-#include "WastePlantState.h"
+// WastePlant.h
+#ifndef WASTEPLANT_H
+#define WASTEPLANT_H
 
-class WastePlant: public Plant
-{
-private:
-    int wasteCapacity;
-    double recyclingRate;
-    WastePlantState *wasteState;
+#include "Plant.h"
+
+// Forward declarations
+class PlantState;
+class Operating;
+class PartialState;
+class Shutdown;
+
+class WastePlant : public Plant {
 public:
-    WastePlant(/* args */);
+    WastePlant(const std::string& name, const std::string& loc, int cap);
     ~WastePlant();
+
+    // Plant operations
+    void startPlant() override;
+    void stopPlant() override;
+    void performMaintenance() override;
+    std::string getPlantDetails() const override;
+
+ 
+    void startOperation() override;
+    void stopOperation() override;
+    void performInspection() override;
+    std::string getBuildingDetails() const override;
+
+    // Waste-specific operations
     void recycleWaste();
     void handleWasteOverflow();
     void startWasteProcessing();
-    WastePlantState* getWasteState();
-};
-#endif
 
+    // Implementing Plant's pure virtual functions
+   // void handleFault() override;
+   // void adjustParameters(double factor) override;
+
+private:
+    int wasteCapacity;
+    double recyclingRate;
+    // Removed PlantState* wasteState to prevent double management
+};
+
+#endif // WASTEPLANT_H
