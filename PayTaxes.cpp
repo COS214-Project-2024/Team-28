@@ -1,17 +1,6 @@
-#include <exception>
-using namespace std;
-
+// PayTaxes.cpp
 #include "PayTaxes.h"
-#include "Citizens.h"
-#include "CityManager.h"
-#include "Citizen.h"
-#include "Command.h"
 
-void() PayTaxes::calculateTax(Citizen aCitizen) {
-	throw "Not yet implemented";
+void PayTaxes::execute() {
+    cityManager->notifyCitizens("Taxes payment due.");
 }
-
-void PayTaxes::collectTax(Citizen aCitizen) {
-	throw "Not yet implemented";
-}
-

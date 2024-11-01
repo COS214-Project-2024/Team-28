@@ -1,17 +1,6 @@
-#include <exception>
-using namespace std;
-
+// PayLevies.cpp
 #include "PayLevies.h"
-#include "Citizens.h"
-#include "CityManager.h"
-#include "Citizen.h"
-#include "Command.h"
 
-void PayLevies::calculateLevies(Citizen aCitizen) {
-	throw "Not yet implemented";
+void PayLevies::execute() {
+    cityManager->notifyCitizens("Levies payment due.");
 }
-
-void PayLevies::collectLevies(Citizens aArray) {
-	throw "Not yet implemented";
-}
-

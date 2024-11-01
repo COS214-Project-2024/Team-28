@@ -1,24 +1,12 @@
-#include <exception>
-using namespace std;
+#ifndef SOCIALWELFARESTRATEGY_H
+#define SOCIALWELFARESTRATEGY_H
 
-#ifndef __SocialWelfareStrategy_h__
-#define __SocialWelfareStrategy_h__
-
-#include "Government.h"
 #include "Strategy.h"
+#include "Government.h"
 
-class Government;
-// class Strategy;
-class SocialWelfareStrategy;
-
-class SocialWelfareStrategy: public Strategy
-{
-
-	public: void executeStrategy(Government aGovernment);
-
-	public: void increaseHealthcareBudget();
-
-	public: void subsidizeEducation();
+class SocialWelfareStrategy : public Strategy {
+public:
+    void executeStrategy(Government* government) override;
 };
 
-#endif
+#endif // SOCIALWELFARESTRATEGY_H

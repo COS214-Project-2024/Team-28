@@ -1,22 +1,11 @@
-#include <exception>
-using namespace std;
+// Command.h
+#ifndef COMMAND_H
+#define COMMAND_H
 
-#ifndef __Command_h__
-#define __Command_h__
-
-// #include "Government.h"
-
-class Government;
-class Command;
-
-class Command
-{
-	private: CommandReceiver _receiver;
-	public: Government* _unnamed_Government_;
-
-	public: void execute();
-
-	public: void undo();
+class Command {
+public:
+    virtual void execute() = 0;
+    virtual ~Command() = default;
 };
 
-#endif
+#endif // COMMAND_H

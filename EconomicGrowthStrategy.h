@@ -1,28 +1,12 @@
-#include <exception>
-using namespace std;
+#ifndef ECONOMICGROWTHSTRATEGY_H
+#define ECONOMICGROWTHSTRATEGY_H
 
-#ifndef __EconomicGrowthStrategy_h__
-#define __EconomicGrowthStrategy_h__
-
-#include "Government.h"
-// #include "BuildingFactory.h"
 #include "Strategy.h"
+#include "Government.h"
 
-class Government;
-class BuildingFactory;
-// class Strategy;
-class EconomicGrowthStrategy;
-
-class EconomicGrowthStrategy: public Strategy
-{
-
-	public: void() executeStrategy(Government aGovernment);
-
-	public: void incentivizeBusinesses();
-
-	public: void lowerCorporateTaxes();
-
-	public: void addBusinesses(BuildingFactory* aNewbuilding);
+class EconomicGrowthStrategy : public Strategy {
+public:
+    void executeStrategy(Government* government) override;
 };
 
-#endif
+#endif // ECONOMICGROWTHSTRATEGY_H
