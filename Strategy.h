@@ -1,19 +1,13 @@
-#include <exception>
-using namespace std;
-
-#ifndef __Strategy_h__
-#define __Strategy_h__
-
-#include "Government.h"
+// Strategy.h
+#ifndef STRATEGY_H
+#define STRATEGY_H
 
 class Government;
-class Strategy;
 
-__abstract class Strategy
-{
-	public: Government* _unnamed_Government_;
-
-	public: void() executeStrategy(Government aGovernment);
+class Strategy {
+public:
+    virtual void executeStrategy(Government* government) = 0;
+    virtual ~Strategy() = default;
 };
 
-#endif
+#endif // STRATEGY_H

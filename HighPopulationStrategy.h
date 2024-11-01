@@ -1,28 +1,12 @@
-#include <exception>
-using namespace std;
+// HighPopulationStrategy.h
+#ifndef HIGHPOPULATIONSTRATEGY_H
+#define HIGHPOPULATIONSTRATEGY_H
 
-#ifndef __HighPopulationStrategy_h__
-#define __HighPopulationStrategy_h__
-
-#include "Government.h"
 #include "Strategy.h"
+#include "Government.h"
 
-class Government;
-// class Strategy;
-class HighPopulationStrategy;
-
-class HighPopulationStrategy: public Strategy
-{
-
-	public: void executeStrategy(Government aGovernment);
-
-	public: void expandResidentialInfrastructure();
-
-	public: void incentivizeEmploymentGrowth();
-
-	public: void improveTransportationNetwork();
-
-	public: void manageUtilityDemand();
+class HighPopulationStrategy : public Strategy {
+public:
+    void executeStrategy(Government* government) override;
 };
-
-#endif
+#endif // HIGHPOPULATIONSTRATEGY_H

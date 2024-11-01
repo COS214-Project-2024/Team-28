@@ -1,40 +1,42 @@
-#include <exception>
-using namespace std;
+#ifndef GOVERNMENT_H
+#define GOVERNMENT_H
 
-#ifndef __Government_h__
-#define __Government_h__
-
-// #include "Command.h"
-// #include "Strategy.h"
+#include <vector>
+#include <string>
+#include "Command.h"
+#include "Strategy.h"
 #include "Citizen.h"
 
-class Command;
-class Strategy;
-class Citizen;
-class Government;
+class Government {
+public:
+    Government();
+    void setTaxRate(double rate);
+    double getTaxRate() const;
+    void collectTaxes(const std::vector<Citizen>& citizens);
+    void allocateBudget(const std::string& department, double amount);
+    void createPolicy(const std::string& policyName);
+    void evaluateCitizenNeeds(const std::vector<Citizen>& citizens);
+    void setCommand(Command* command);
+    void executeCommand();
+    void setStrategy(Strategy* strategy);
+    void executeStrategy();
+    void reduceLevies();
+    void increaseTaxesAndLevies();
+    std::vector<Citizen> getCitizens() const;
+    void setCitizens(const std::vector<Citizen>& citizens);
+    void updateEconomicSituation(int policyEffect, int taxEffect, int economicEffect);
+    int getEconomicSituation() const;
 
-class Government
-{
-	private: double _budget;
-	private: double _taxRate;
-	private: String _cityPolicies[];
-	private: String _publicServices[];
-	public: Command* _unnamed_Command_;
-	public: Strategy* _unnamed_Strategy_;
-
-	public: void setTaxRate(double aRate);
-
-	public: void collectTaxes(List<Citizen> aCitizens);
-
-	public: void allocateBudget(String aDepartment, double aAmount);
-
-	public: void createPolicy(String aPolicyName);
-
-	public: void evaluateCitizenNeeds(List<Citizen> aCitizens);
-
-	public: void registerObserver(Observer aObserver);
-
-	public: void notifyObservers();
+private:
+    double budget;
+    double taxRate;
+    std::vector<std::string> cityPolicies;
+    std::vector<std::string> publicServices;
+    Command* command;
+    Strategy* strategy;
+    std::vector<Citizen> citizens;
+    int economicSituation;
+    int levyRate;
 };
 
-#endif
+#endif // GOVERNMENT_H
