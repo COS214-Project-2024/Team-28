@@ -6,8 +6,9 @@
 
 class WastePlantState : public PlantState {
 public:
-    virtual ~WastePlantState() = default;
-    virtual void handleState(Plant* plant) override = 0;
+    WastePlantState(/* args */);
+    ~WastePlantState();
+    virtual void handleState(Plant*) = 0;
 };
 
 #endif // WASTEPLANTSTATE_H

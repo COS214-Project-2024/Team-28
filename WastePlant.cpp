@@ -1,15 +1,15 @@
 
 #include "WastePlant.h"
-#include "Operating.h"
-#include "PartialState.h"
-#include "Shutdown.h"
+#include "WastePlantOperationalState.h"
+#include "WastePlantMaintenanceState.h"
+#include "WastePlantShutdownState.h"
 #include "PlantState.h" 
 #include <iostream>
 
 
 WastePlant::WastePlant(const std::string& name, const std::string& loc, int cap)
     : Plant(name, loc, cap), wasteCapacity(cap), recyclingRate(0.0) {
-    setState(new Operating());
+    setState(new WastePlantOperationalState());
 }
 
 
@@ -19,19 +19,19 @@ WastePlant::~WastePlant() {
 
 void WastePlant::startPlant() {
     std::cout << "Starting Waste Plant: " << getName() << std::endl;
-    setState(new Operating());
+    setState(new WastePlantOperationalState());
     notifyManagers();
 }
 
 void WastePlant::stopPlant() {
     std::cout << "Stopping Waste Plant: " << getName() << std::endl;
-    setState(new Shutdown());
+    setState(new WastePlantShutdownState());
     notifyManagers();
 }
 
 void WastePlant::performMaintenance() {
     std::cout << "Performing maintenance on Waste Plant: " << getName() << std::endl;
-    setState(new PartialState());
+    setState(new WastePlantMaintenanceState());
     notifyManagers();
 }
 

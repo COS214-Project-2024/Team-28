@@ -9,7 +9,6 @@
 class PowerPlantShutdown : public PlantState {
 public:
   void handleState(Plant* plant) override;
-    std::string getStateName() const override { return "Shutdown"; }
+    std::string getStateName() override;
 };
-
 #endif // POWERPLANTSHUTDOWN_H

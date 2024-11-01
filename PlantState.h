@@ -11,7 +11,7 @@ class PlantState {
 public:
     virtual ~PlantState() = default;
     virtual void handleState(Plant* plant) = 0;
-    virtual std::string getStateName() const = 0;
+    virtual std::string getStateName() = 0;
 };
 
 #endif // PLANTSTATE_H

@@ -39,51 +39,51 @@ int main() {
     // Report status for WastePlant
     wasteManager.reportStatus();
 
-    // --- PowerPlant Testing ---
+    // // --- PowerPlant Testing ---
 
-    // Create a PowerPlant
-    PowerPlant powerPlant("PowerPlant1", "Uptown", 500.0); // 500 MW capacity
+    // // Create a PowerPlant
+    // PowerPlant powerPlant("PowerPlant1", "Uptown", 500.0); // 500 MW capacity
 
-    // Create a PowerPlantObserver
-    PowerPlantObserver powerManager("PowerManager1");
+    // // Create a PowerPlantObserver
+    // PowerPlantObserver powerManager("PowerManager1");
 
-    // Attach the PowerPlant to the PowerPlantObserver
-    powerManager.attach(&powerPlant);
+    // // Attach the PowerPlant to the PowerPlantObserver
+    // powerManager.attach(&powerPlant);
 
-    std::cout << "\nPlant " << powerPlant.getPlantDetails()
-              << " attached to manager " << powerManager.getName() << std::endl;
+    // std::cout << "\nPlant " << powerPlant.getPlantDetails()
+    //           << " attached to manager " << powerManager.getName() << std::endl;
 
-    std::cout << "\n--- Simulating state changes for PowerPlant ---\n" << std::endl;
+    // std::cout << "\n--- Simulating state changes for PowerPlant ---\n" << std::endl;
 
-    // Simulate initial electricity generation
-    powerPlant.changePowerOutput(400.0); // Set initial output to 400 MW
-    powerPlant.generateElectricity();
+    // // Simulate initial electricity generation
+    // powerPlant.changePowerOutput(400.0); // Set initial output to 400 MW
+    // powerPlant.generateElectricity();
 
-    // Report status for PowerPlant
-    powerManager.reportStatus();
+    // // Report status for PowerPlant
+    // powerManager.reportStatus();
 
-    std::cout << "\n--- Simulating Overload ---\n";
-    // Simulate increased power demand leading to overload
-    powerPlant.changePowerOutput(600.0); // Exceeds capacity to trigger overload
-    powerPlant.generateElectricity();
+    // std::cout << "\n--- Simulating Overload ---\n";
+    // // Simulate increased power demand leading to overload
+    // powerPlant.changePowerOutput(600.0); // Exceeds capacity to trigger overload
+    // powerPlant.generateElectricity();
 
-    // Allow time for fault handling
-    std::this_thread::sleep_for(std::chrono::seconds(3));
+    // // Allow time for fault handling
+    // std::this_thread::sleep_for(std::chrono::seconds(3));
 
-    // Report status after fault handling
-    std::cout << "\n--- Reporting Status After Overload Handling ---\n";
-    powerManager.reportStatus();
+    // // Report status after fault handling
+    // std::cout << "\n--- Reporting Status After Overload Handling ---\n";
+    // powerManager.reportStatus();
 
-    std::cout << "\n--- Initiating Maintenance ---\n";
-    // Simulate maintenance
-    powerPlant.performMaintenance();
+    // std::cout << "\n--- Initiating Maintenance ---\n";
+    // // Simulate maintenance
+    // powerPlant.performMaintenance();
 
-    // Allow time for maintenance
-    std::this_thread::sleep_for(std::chrono::seconds(3));
+    // // Allow time for maintenance
+    // std::this_thread::sleep_for(std::chrono::seconds(3));
 
-    // Report final status for PowerPlant
-    std::cout << "\n--- Final Reporting Status ---\n";
-    powerManager.reportStatus();
+    // // Report final status for PowerPlant
+    // std::cout << "\n--- Final Reporting Status ---\n";
+    // powerManager.reportStatus();
 
     return 0;
 }

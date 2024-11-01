@@ -1,7 +1,7 @@
 #include "PowerPlant.h"
-#include "Operational.h"
-#include "Overload.h"
-#include "PowerPlantShutdown.h"
+#include "PowerPlantOperationalState.h"
+#include "PowerPlantOverloadState.h"
+#include "PowerPlantShutdownState.h"
 #include <iostream>
 #include <memory>
 #include <algorithm>
@@ -9,7 +9,7 @@
 
 PowerPlant::PowerPlant(const std::string& name, const std::string& loc, int cap)
     : Plant(name, loc, cap), capacity(cap), output(0.0) {
-    setState(new Operational());
+    setState(new PowerPlantOperationalState());
 }
 
 PowerPlant::~PowerPlant(){
@@ -37,21 +37,21 @@ std::string PowerPlant::getPlantDetails() const {
 // Start the power plant and transition to the Operational state
 void PowerPlant::startPlant() {
     std::cout << "Starting Power Plant: " << getName()<< std::endl;
-    setState(new Operational());
+    setState(new PowerPlantOperationalState());
     notifyManagers();
 }
 
 // Stop the power plant and transition to the Shutdown state
 void PowerPlant::stopPlant() {
     std::cout << "Stopping Power Plant: " << getName() << std::endl;
-    setState(new PowerPlantShutdown());
+    setState(new PowerPlantShutdownState());
     notifyManagers();
 }
 
 // Perform maintenance and transition to the Operational state
 void PowerPlant::performMaintenance() {
     std::cout << "Performing maintenance on Power Plant: " << getName() << std::endl;
-    setState(new Operational());
+    setState(new PowerPlantOperationalState());
     notifyManagers();
 }
 

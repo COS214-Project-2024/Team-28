@@ -6,7 +6,7 @@
 
 // Forward declarations
 class PlantState;
-class Operating;
+class WastePlantOperationalState;
 class PartialState;
 class Shutdown;
 

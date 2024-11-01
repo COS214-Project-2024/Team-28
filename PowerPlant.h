@@ -7,10 +7,10 @@
 #include "PlantState.h"
 
 class PlantState;
-class Operational;
-class Overload;
+class PowerPlantOperationalState;
+class PowerPlantOverloadState;
 //class PartialState;
-class PowerPlantShutdown;
+class PowerPlantShutdownState;
 
 class PowerPlant : public Plant {
 private:

@@ -4,11 +4,11 @@ CXXFLAGS = -g -std=c++14
 
 # List of all source files
 SRCS = main.cpp Plant.cpp PlantsManager.cpp WastePlant.cpp \
-	WastePlantObserver.cpp PowerPlant.cpp PowerPlantObserver.cpp \
-	SewagePlantObserver.cpp WaterPlantObserver.cpp \
-	Operating.cpp Operational.cpp Overload.cpp PowerPlantShutdown.cpp \
-	PartialState.cpp Shutdown.cpp \
-	 WastePlantState.cpp SewagePlantState.cpp WaterPlantState.cpp
+       WastePlantObserver.cpp PowerPlant.cpp PowerPlantObserver.cpp \
+       SewagePlantObserver.cpp WaterPlantObserver.cpp \
+       PowerPlantOperationalState.cpp PowerPlantOverloadState.cpp \
+       PowerPlantShutdown.cpp WastePlantState.cpp SewagePlantState.cpp \
+       WaterPlantState.cpp
 
 # Corresponding object files
 OBJS = $(SRCS:.cpp=.o)
