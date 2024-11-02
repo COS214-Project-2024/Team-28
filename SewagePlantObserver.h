@@ -18,12 +18,12 @@ public:
     void update(Plant* plant, PlantState* state) override;
 
     // Additional functions (do not use 'override' if not in base class)
-    void initiateFaultHandling(const std::string& faultType);
-    void restorePlantOperations();
-    void performRoutineMaintenance(Plant* plant);
-    void changeState(Plant* plant, const std::string& newState);
-    void reportStatus() const;
-    void allocateResources();
+    void initiateFaultHandling(const std::string& faultType) override;
+    void restorePlantOperations() override;
+    void performRoutineMaintenance(Plant* plant) override;
+    void changeState(Plant* plant, const std::string& newState) override;
+    void reportStatus() const override;
+    void allocateResources() override;
 
 private:
     bool faultActive;
