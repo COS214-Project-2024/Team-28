@@ -122,6 +122,8 @@
     "stdexcept": "cpp",
     "streambuf": "cpp",
     "typeinfo": "cpp",
-    "industrialbuiliding": "cpp"
+    "industrialbuiliding": "cpp",
+    "ctime": "cpp",
+    "map": "cpp"
   }
 }

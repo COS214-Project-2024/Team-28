@@ -2,7 +2,6 @@
 #define BUILDING_H
 
 #include <iostream>
-#include "IndustrialBuilding.h"
 //ABSTRACT PRODUCTS
 
 class Building{ //
@@ -22,6 +21,9 @@ public:
 class CommercialBuilding : public Building {
 public:
     virtual ~CommercialBuilding() = default;
+    virtual float getBuildCost() const = 0;
+    virtual std::string getAddress() const = 0;
+    virtual void print() const = 0;
 };
 
 class IndustrialBuilding : public Building {
