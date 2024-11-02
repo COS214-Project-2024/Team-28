@@ -104,3 +104,13 @@ Services* CityManager::getService(const std::string& serviceType) {
     }
     return nullptr;
 }
+
+void CityManager::payLevies(const std::vector<Citizen>& citizens) {
+    for (const auto& citizen : citizens) {
+        if (citizen.isHouseOwner()) {
+            std::cout << "House owner: Noted, paying levies." << std::endl;
+            // Example levy amount
+            transportationBudget += 500.0;
+        }
+    }
+}

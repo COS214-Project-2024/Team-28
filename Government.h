@@ -6,6 +6,7 @@
 #include "Command.h"
 #include "Strategy.h"
 #include "Citizen.h"
+#include "Worker.h"
 
 class Government {
 public:
@@ -26,6 +27,7 @@ public:
     void setCitizens(const std::vector<Citizen>& citizens);
     void updateEconomicSituation(int policyEffect, int taxEffect, int economicEffect);
     int getEconomicSituation() const;
+    void payTaxes();
 
 private:
     double budget;

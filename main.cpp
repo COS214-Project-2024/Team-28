@@ -8,6 +8,8 @@
 #include "SocialWelfareStrategy.h"
 #include "HighPopulationStrategy.h"
 #include "Citizen.h"
+#include "Worker.h"
+#include "Dependent.h"
 #include "HealthServices.h"
 #include "EducationServices.h"
 #include "EntertainmentServices.h"
@@ -61,6 +63,7 @@ int main() {
     cityManager.requestService("Security");
     cityManager.requestService("Transportation");
     std::cout << std::endl;
+
     // Test HealthServices
     std::cout << "##########################################################################################################################" << std::endl;
     std::cout << std::endl;    
@@ -204,9 +207,11 @@ int main() {
 
     // Create some citizens
     std::vector<Citizen> citizens;
-    for (int i = 0; i < 1; ++i) { // Only one citizen for demonstration
-        citizens.push_back(Citizen(&government));
-    }
+    citizens.push_back(Worker(&government, true, 50000.0)); // Worker with house
+    citizens.push_back(Worker(&government, false, 60000.0)); // Worker without house
+    citizens.push_back(Dependent(&government, true)); // Dependent with house
+    citizens.push_back(Dependent(&government, false)); // Dependent without house
+    citizens.push_back(Worker(&government, true, 70000.0)); // Worker with house
 
     // Set citizens in the government
     government.setCitizens(citizens);
@@ -249,8 +254,15 @@ int main() {
     std::cout << "##########################################################################################################################" << std::endl;
     std::cout << std::endl;      
     std::cout << "Collecting taxes..." << std::endl;
-    government.setTaxRate(0.1);
-    government.collectTaxes(citizens);
+    government.payTaxes();
+    printCitizenSatisfaction(citizens);
+
+    // Collect levies
+    std::cout << std::endl;
+    std::cout << "##########################################################################################################################" << std::endl;
+    std::cout << std::endl;      
+    std::cout << "Collecting levies..." << std::endl;
+    cityManager.payLevies(citizens);
     printCitizenSatisfaction(citizens);
 
     // Execute commands

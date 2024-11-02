@@ -2,11 +2,10 @@
 #include "Government.h"
 #include <iostream>
 
-Citizen::Citizen(Government* government) : satisfaction(50), government(government), striking(false) {}
+Citizen::Citizen(Government* government, bool isHouseOwner) : satisfaction(50), government(government), striking(false), houseOwner(isHouseOwner) {}
 
-double Citizen::payTaxes(double taxRate) const {
-    // Implement tax payment logic here
-    return taxRate * 1000; // Example calculation
+double Citizen::payTaxes() const {
+    return 0.0; // Default implementation for non-workers
 }
 
 void Citizen::receiveFoodHamper() {
@@ -57,4 +56,8 @@ bool Citizen::isStriking() const {
 
 void Citizen::setSatisfaction(int satisfaction) {
     this->satisfaction = satisfaction;
+}
+
+bool Citizen::isHouseOwner() const {
+    return houseOwner;
 }
