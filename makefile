@@ -1,47 +1,53 @@
-# Compiler and flags
+# Compiler settings
 CXX = g++
 CXXFLAGS = -g -std=c++14
 
-# List of all source files
-SRCS = main.cpp Plant.cpp PlantsManager.cpp WastePlant.cpp \
-       WastePlantObserver.cpp PowerPlant.cpp PowerPlantObserver.cpp \
-       SewagePlantObserver.cpp WaterPlantObserver.cpp \
-       PowerPlantOperationalState.cpp PowerPlantOverloadState.cpp \
-       PowerPlantShutdownState.cpp PowerPlantState.cpp PlantState.cpp \
-       WastePlantState.cpp SewagePlantState.cpp WastePlantMaintenanceState.cpp \
-       WastePlantOperationalState.cpp WastePlantShutdownState.cpp CityManager.cpp
+# Source files
+SOURCES = main.cpp \
+	Plant.cpp \
+	PlantState.cpp \
+	PlantsManager.cpp \
+	WastePlant.cpp \
+	WastePlantObserver.cpp \
+	WastePlantState.cpp \
+	WastePlantOperationalState.cpp \
+	WastePlantShutdownState.cpp \
+	WastePlantMaintenanceState.cpp \
+	PowerPlant.cpp \
+	PowerPlantObserver.cpp \
+	PowerPlantState.cpp \
+	PowerPlantOperationalState.cpp \
+	PowerPlantShutdownState.cpp \
+	PowerPlantOverloadState.cpp \
+	SewagePlant.cpp \
+	SewagePlantObserver.cpp \
+	SewagePlantState.cpp \
+	SewagePlantOperationalState.cpp \
+	SewagePlantShutdownState.cpp \
+	SewagePlantMaintenanceState.cpp \
+	CityManager.cpp
 
-# Corresponding object files
-OBJS = $(SRCS:.cpp=.o)
+# Object files
+OBJECTS = $(SOURCES:.cpp=.o)
 
 # Target executable
 TARGET = main
 
-# Default target
-all: $(TARGET)
+# Build rules
+$(TARGET): $(OBJECTS)
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJECTS)
 
-# Link object files to create the executable
-$(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
-
-# Compile source files into object files
+# Pattern rule for object files
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-# Run the executable normally
-run: $(TARGET)
-	@./$(TARGET)
-
-# Debug the executable using gdb
-debug: $(TARGET)
-	gdb ./$(TARGET)
-
-# Run the executable with valgrind for memory checking
-valgrind: $(TARGET)
-	valgrind --leak-check=full ./$(TARGET)
-
-# Clean build artifacts
+# Clean rule
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f $(OBJECTS) $(TARGET)
 
-.PHONY: all run debug valgrind clean
+# Run rule
+run: $(TARGET)
+	./$(TARGET)
+
+# Phony targets
+.PHONY: clean run

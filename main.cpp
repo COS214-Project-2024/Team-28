@@ -3,6 +3,8 @@
 #include "WastePlant.h"
 #include "PowerPlantObserver.h"
 #include "PowerPlant.h"
+#include "SewagePlantObserver.h"    // Include SewagePlantObserver
+#include "SewagePlant.h"            // Include SewagePlant
 #include <memory>
 #include <iostream>
 #include <thread>
@@ -25,7 +27,7 @@ int main() {
 
     std::cout << "\n--- Simulating state changes for WastePlant ---\n" << std::endl;
 
-    // Simulate a state change to PartialState
+    // Simulate a state change to Maintenance
     wastePlant.performMaintenance();
 
     // Simulate a state change to Shutdown after some time
@@ -39,51 +41,81 @@ int main() {
     // Report status for WastePlant
     wasteManager.reportStatus();
 
-    // // --- PowerPlant Testing ---
+    // --- PowerPlant Testing ---
 
-    // // Create a PowerPlant
-    // PowerPlant powerPlant("PowerPlant1", "Uptown", 500.0); // 500 MW capacity
+    // Create a PowerPlant
+    PowerPlant powerPlant("PowerPlant1", "Uptown", 500.0); // 500 MW capacity
 
-    // // Create a PowerPlantObserver
-    // PowerPlantObserver powerManager("PowerManager1");
+    // Create a PowerPlantObserver
+    PowerPlantObserver powerManager("PowerManager1");
 
-    // // Attach the PowerPlant to the PowerPlantObserver
-    // powerManager.attach(&powerPlant);
+    // Attach the PowerPlant to the PowerPlantObserver
+    powerManager.attach(&powerPlant);
 
-    // std::cout << "\nPlant " << powerPlant.getPlantDetails()
-    //           << " attached to manager " << powerManager.getName() << std::endl;
+    std::cout << "\nPlant " << powerPlant.getPlantDetails()
+              << " attached to manager " << powerManager.getName() << std::endl;
 
-    // std::cout << "\n--- Simulating state changes for PowerPlant ---\n" << std::endl;
+    std::cout << "\n--- Simulating state changes for PowerPlant ---\n" << std::endl;
 
-    // // Simulate initial electricity generation
-    // powerPlant.changePowerOutput(400.0); // Set initial output to 400 MW
-    // powerPlant.generateElectricity();
+    // Simulate initial electricity generation
+    powerPlant.changePowerOutput(400.0); // Set initial output to 400 MW
+    powerPlant.generateElectricity();
 
-    // // Report status for PowerPlant
-    // powerManager.reportStatus();
+    // Report status for PowerPlant
+    powerManager.reportStatus();
 
-    // std::cout << "\n--- Simulating Overload ---\n";
-    // // Simulate increased power demand leading to overload
-    // powerPlant.changePowerOutput(600.0); // Exceeds capacity to trigger overload
-    // powerPlant.generateElectricity();
+    std::cout << "\n--- Simulating Overload ---\n";
+    // Simulate increased power demand leading to overload
+    powerPlant.changePowerOutput(600.0); // Exceeds capacity to trigger overload
+    powerPlant.generateElectricity();
 
-    // // Allow time for fault handling
-    // std::this_thread::sleep_for(std::chrono::seconds(3));
+    // Allow time for fault handling
+    std::this_thread::sleep_for(std::chrono::seconds(3));
 
-    // // Report status after fault handling
-    // std::cout << "\n--- Reporting Status After Overload Handling ---\n";
-    // powerManager.reportStatus();
+    // Report status after fault handling
+    std::cout << "\n--- Reporting Status After Overload Handling ---\n";
+    powerManager.reportStatus();
 
-    // std::cout << "\n--- Initiating Maintenance ---\n";
-    // // Simulate maintenance
-    // powerPlant.performMaintenance();
+    std::cout << "\n--- Initiating Maintenance ---\n";
+    // Simulate maintenance
+    powerPlant.performMaintenance();
 
-    // // Allow time for maintenance
-    // std::this_thread::sleep_for(std::chrono::seconds(3));
+    // Allow time for maintenance
+    std::this_thread::sleep_for(std::chrono::seconds(3));
 
-    // // Report final status for PowerPlant
-    // std::cout << "\n--- Final Reporting Status ---\n";
-    // powerManager.reportStatus();
+    // Report final status for PowerPlant
+    std::cout << "\n--- Final Reporting Status ---\n";
+    powerManager.reportStatus();
+
+    // --- SewagePlant Testing ---
+
+    // Create a SewagePlant
+    SewagePlant sewagePlant("SewagePlant1", "Midtown", 800);
+
+    // Create a SewagePlantObserver
+    SewagePlantObserver sewageManager("SewageManager1");
+
+    // Attach the SewagePlant to the SewagePlantObserver
+    sewageManager.attach(&sewagePlant);
+
+    std::cout << "\nPlant " << sewagePlant.getPlantDetails()
+              << " attached to manager " << sewageManager.getName() << std::endl;
+
+    std::cout << "\n--- Simulating state changes for SewagePlant ---\n" << std::endl;
+
+    // Simulate a state change to Maintenance
+    sewagePlant.performMaintenance();
+
+    // Simulate a state change to Shutdown after some time
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+    sewagePlant.stopPlant();
+
+    // Simulate a state change back to Operating after some time
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+    sewagePlant.startPlant();
+
+    // Report status for SewagePlant
+    sewageManager.reportStatus();
 
     return 0;
 }

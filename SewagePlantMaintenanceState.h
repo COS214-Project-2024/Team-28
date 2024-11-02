@@ -1,15 +1,24 @@
+// SewagePlantMaintenanceState.h
 #ifndef SEWAGEPLANTMAINTENANCESTATE_H
 #define SEWAGEPLANTMAINTENANCESTATE_H
-#include "SewagePlantState.h"
-#include "SewagePlantOperationalSate.h"
 
-class SewagePlantMaintenanceState: public SewagePlantState
+#include "SewagePlantState.h"
+#include <string>
+
+class SewagePlantMaintenanceState : public SewagePlantState
 {
-    private:
-        SewagePlantOperationalSate *operationalState;
-    public:
-        SewagePlantMaintenanceState();
-        void handleSewageState() override;
-        ~SewagePlantMaintenanceState();
+public:
+    // Constructors
+    SewagePlantMaintenanceState() : SewagePlantState() {}
+    
+    // Destructor
+    ~SewagePlantMaintenanceState() override {}
+    
+    // Override handleState method
+    void handleState(Plant* plant) override;
+    
+    // Override getStateName method
+    std::string getStateName() override;
 };
-#endif
+
+#endif // SEWAGEPLANTMAINTENANCESTATE_H

@@ -7,8 +7,8 @@
 // Forward declarations
 class PlantState;
 class WastePlantOperationalState;
-class PartialState;
-class Shutdown;
+class WastePlantMaintenanceState;
+class WastePlantShutdownState;
 
 class WastePlant : public Plant {
 public:

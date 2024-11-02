@@ -3,7 +3,7 @@
 #define POWERPLANTOBSERVER_H
 
 #include "PlantsManager.h"
-#include "PlantState.h" // Ensure complete type is included
+#include "PlantState.h" 
 #include "PowerPlant.h"
 #include <iostream>
 

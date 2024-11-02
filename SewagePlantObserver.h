@@ -3,27 +3,31 @@
 #define SEWAGEPLANTOBSERVER_H
 
 #include "PlantsManager.h"
-#include "PlantState.h" // Ensure complete type is included
-#include "SewagePlant.h"
-#include <iostream>
+#include <string>
 
 class SewagePlantObserver : public PlantsManager {
 public:
-    // Constructor 
+    // Constructor
     SewagePlantObserver(const std::string& managerName)
-        : PlantsManager(managerName), faultActive(false) {}
+        : PlantsManager(managerName), faultActive(false), maintenanceInProgress(false) {}
 
-    // Override methods from PlantsManager
+    // Destructor
+    virtual ~SewagePlantObserver() {}
+
+    // PlantManager virtual function
     void update(Plant* plant, PlantState* state) override;
-    void initiateFaultHandling(const std::string& faultType) override;
-    void restorePlantOperations() override;
-    void performRoutineMaintenance(Plant* plant) override;
-    void changeState(Plant* plant, const std::string& newState) override;
-    void reportStatus() const override;
-    void allocateResources() override;
+
+    // Additional functions (do not use 'override' if not in base class)
+    void initiateFaultHandling(const std::string& faultType);
+    void restorePlantOperations();
+    void performRoutineMaintenance(Plant* plant);
+    void changeState(Plant* plant, const std::string& newState);
+    void reportStatus() const;
+    void allocateResources();
 
 private:
     bool faultActive;
+    bool maintenanceInProgress; 
 };
 
 #endif // SEWAGEPLANTOBSERVER_H

@@ -8,7 +8,7 @@ class WaterPlant : public Plant
 {
 private:
     std::string purificationLevel;
-    WaterPlantState *waterState;
+    int NumberofLitres;
 public:
     WaterPlant();
     ~WaterPlant();

@@ -1,22 +1,24 @@
+// SewagePlantState.h
 #ifndef SEWAGEPLANTSTATE_H
 #define SEWAGEPLANTSTATE_H
+
 #include "PlantState.h"
+#include <string>
 
-class SewagePlantState: public PlantState
-{
-private:
-    /* data */
+// Forward declaration to avoid circular dependencies
+class SewagePlant;
+
+class SewagePlantState : public PlantState {
 public:
-    SewagePlantState(/* args */);
-    ~SewagePlantState();
-    virtual void handleSewageState() = 0;
+    // Default constructor
+    SewagePlantState() : PlantState() {}
+    
+    // Virtual Destructor
+    virtual ~SewagePlantState() {}
+    
+    // Pure virtual methods
+    virtual void handleState(Plant* plant) override = 0;
+    virtual std::string getStateName() override = 0;
 };
-#endif
 
-// SewagePlantState::SewagePlantState(/* args */)
-// {
-// }
-
-// SewagePlantState::~SewagePlantState()
-// {
-// }
+#endif // SEWAGEPLANTSTATE_H
