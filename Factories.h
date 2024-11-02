@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <iostream>
-#include "IndustrialBuilding.h"
+#include "Building.h"
 #include "MaterialHub.h"
 
 class Factories : public IndustrialBuilding {
