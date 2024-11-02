@@ -5,8 +5,8 @@ class Government;
 
 class Citizen {
 public:
-    Citizen(Government* government);
-    double payTaxes(double taxRate) const;
+    Citizen(Government* government, bool isHouseOwner);
+    virtual double payTaxes() const;
     void receiveFoodHamper();
     void receiveMoney(double amount);
     void acknowledgeGrant();
@@ -16,11 +16,13 @@ public:
     void stopStriking();
     bool isStriking() const;
     void setSatisfaction(int satisfaction);
+    bool isHouseOwner() const;
 
-private:
+protected:
     int satisfaction;
     Government* government;
     bool striking;
+    bool houseOwner;
 };
 
 #endif // CITIZEN_H

@@ -64,7 +64,8 @@ CXXFLAGS = -Wall -g
 SOURCES = main.cpp Government.cpp CityManager.cpp PayTaxes.cpp PayLevies.cpp \
           EconomicGrowthStrategy.cpp SocialWelfareStrategy.cpp HighPopulationStrategy.cpp Citizen.cpp \
           Services.cpp HealthServices.cpp EducationServices.cpp EntertainmentServices.cpp \
-          SecurityServices.cpp TransportationServices.cpp PublicTransit.cpp Trains.cpp Airports.cpp Roads.cpp
+          SecurityServices.cpp TransportationServices.cpp PublicTransit.cpp Trains.cpp Airports.cpp Roads.cpp \
+		  Worker.cpp Dependent.cpp
 
 # Corresponding object files
 OBJECTS = $(SOURCES:.cpp=.o)

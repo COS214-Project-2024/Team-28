@@ -1,4 +1,5 @@
 #include "Government.h"
+#include <iostream>
 
 Government::Government() : budget(0.0), taxRate(0.0), economicSituation(50), levyRate(10) {}
 
@@ -13,7 +14,7 @@ double Government::getTaxRate() const {
 void Government::collectTaxes(const std::vector<Citizen>& citizens) {
     double totalTaxes = 0.0;
     for (const auto& citizen : citizens) {
-        totalTaxes += citizen.payTaxes(taxRate);
+        totalTaxes += citizen.payTaxes();
     }
     budget += totalTaxes;
 }
@@ -77,4 +78,13 @@ void Government::updateEconomicSituation(int policyEffect, int taxEffect, int ec
 
 int Government::getEconomicSituation() const {
     return economicSituation;
+}
+
+void Government::payTaxes() {
+    for (auto& citizen : citizens) {
+        if (dynamic_cast<Worker*>(&citizen)) {
+            std::cout << "Worker: Noted, paying taxes." << std::endl;
+            budget += citizen.payTaxes();
+        }
+    }
 }
