@@ -6,7 +6,7 @@ CXXFLAGS = -std=c++11 -Wall -Wextra
 TARGET = main
 
 # Source files
-SOURCES = main.cpp  # List your .cpp files here
+SOURCES = Factorymain.cpp Factories.cpp Warehouses.cpp LandMarks.cpp CommercialBuildings.cpp ResidentialBuildings.cpp # List your .cpp files here
 
 # Header files (no need to compile, but you can add them here for reference)
 HEADERS = Building.h BuildingFactory.h CommercialBuildingFactory.h CommercialBuildings.h LandMarkFactory.h LandMarks.h ResidentialBuildingFactory.h ResidentialBuildings.h
