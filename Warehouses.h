@@ -4,7 +4,7 @@
 #include <vector>
 #include <algorithm>
 #include <iostream>
-#include "IndustrialBuilding.h"
+#include "Building.h"
 
 class Warehouses : public IndustrialBuilding {
 private:
