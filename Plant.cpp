@@ -7,7 +7,7 @@
 
 
 Plant::~Plant() {
-    delete currentStatus;
+    //delete currentStatus;
     std::cout << "Plant destructed." << std::endl;
 }
 
