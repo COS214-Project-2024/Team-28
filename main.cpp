@@ -1,10 +1,11 @@
-// main.cpp
 #include "WastePlantObserver.h"
 #include "WastePlant.h"
 #include "PowerPlantObserver.h"
 #include "PowerPlant.h"
 #include "SewagePlantObserver.h"    // Include SewagePlantObserver
 #include "SewagePlant.h"            // Include SewagePlant
+#include "WaterPlantObserver.h"     // Include WaterPlantObserver
+#include "WaterPlant.h"             // Include WaterPlant
 #include <memory>
 #include <iostream>
 #include <thread>
@@ -116,6 +117,39 @@ int main() {
 
     // Report status for SewagePlant
     sewageManager.reportStatus();
+
+    // --- WaterPlant Testing ---
+
+    // Create a WaterPlant
+    WaterPlant waterPlant("WaterPlant1", "Riverside", 1200);
+
+    // Create a WaterPlantObserver
+    WaterPlantObserver waterManager("WaterManager1");
+
+    // Attach the WaterPlant to the WaterPlantObserver
+    waterManager.attach(&waterPlant);
+
+    std::cout << "\nPlant " << waterPlant.getPlantDetails()
+              << " attached to manager " << waterManager.getName() << std::endl;
+
+    std::cout << "\n--- Simulating state changes for WaterPlant ---\n" << std::endl;
+
+    // Simulate starting water treatment
+    waterPlant.startWaterTreatment();
+
+    // Simulate a state change to Maintenance
+    waterPlant.performMaintenance();
+
+    // Simulate a state change to Shutdown after some time
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+    waterPlant.stopPlant();
+
+    // Simulate a state change back to Operating after some time
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+    waterPlant.startPlant();
+
+    // Report status for WaterPlant
+    waterManager.reportStatus();
 
     return 0;
 }
