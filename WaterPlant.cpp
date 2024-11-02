@@ -16,8 +16,9 @@ WaterPlant::~WaterPlant() {
 
 // Start water treatment process
 void WaterPlant::startWaterTreatment() {
+    //if(this->)
     std::cout << "Water treatment started at WaterPlant " << getPlantDetails() << "." << std::endl;
-    // Implement water treatment logic here
+    
 }
 
 // Distribute water
@@ -82,7 +83,7 @@ std::string WaterPlant::getPlantDetails() const {
     return "WaterPlant - Name: " + getName() + ", Location: " + getLocation() + ", Capacity: " + std::to_string(getCapacity());
 }
 
-// Get building details (same as plant details)
+// Get building details
 std::string WaterPlant::getBuildingDetails() const {
     return getPlantDetails();
 }

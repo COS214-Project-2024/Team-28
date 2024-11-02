@@ -5,9 +5,9 @@
 class WaterPlantState: public PlantState
 {
 private:
-    /* data */
+
 public:
-    WaterPlantState(/* args */);
+    WaterPlantState();
     virtual void handleWaterState() = 0;
     ~WaterPlantState();
 };

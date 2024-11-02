@@ -1,9 +1,6 @@
 #include "WaterPlantState.h"
 
-WaterPlantState::WaterPlantState() {
-    // Constructor implementation
-}
+WaterPlantState::WaterPlantState() {}
 
-WaterPlantState::~WaterPlantState() {
-    // Destructor implementation
-}
+WaterPlantState::~WaterPlantState() {}
+  
