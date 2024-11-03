@@ -6,11 +6,11 @@ House::House() : ResidentialBuilding(), address(""), numberOfResidents(0), build
 House::House(std::string address, int numberOfResidents)
     : address(address), numberOfResidents(numberOfResidents), buildingCost(10) {}
 
-float House::getBuildCost() {
+float House::getBuildCost() const{
     return buildingCost;
 }
 
-int House::getNumberOfResidents() {
+int House::getNumberOfResidents() const{
     return numberOfResidents;
 }
 
@@ -32,11 +32,11 @@ Flat::Flat() : ResidentialBuilding(), address(""), numberOfResidents(0), buildin
 Flat::Flat(std::string address, int numberOfResidents)
     : address(address), numberOfResidents(numberOfResidents), buildingCost(100) {}
 
-float Flat::getBuildCost() {
+float Flat::getBuildCost() const{
     return buildingCost;
 }
 
-int Flat::getnumberOfResidents() {
+int Flat::getNumberOfResidents()const{
     return numberOfResidents;
 }
 
@@ -58,11 +58,11 @@ TownHouse::TownHouse() : ResidentialBuilding(), address(""), numberOfResidents(0
 TownHouse::TownHouse(std::string address, int numberOfResidents)
     : address(address), numberOfResidents(numberOfResidents), buildingCost(110) {}
 
-float TownHouse::getBuildCost() {
+float TownHouse::getBuildCost() const{
     return buildingCost;
 }
 
-int TownHouse::getnumberOfResidents() {
+int TownHouse::getNumberOfResidents() const{
     return numberOfResidents;
 }
 
@@ -77,36 +77,79 @@ void TownHouse::print() const {
     std::cout << "Number Of Residents: " << numberOfResidents << std::endl;
     std::cout << "----------" << std::endl;
 }
+//Estate implementation
+Estate::Estate() : ResidentialBuilding(), maxCapacity(10) { // Default max capacity
+        this->address = "";
+        this->buildingCost = 1000;
+        this->numberOfResidents = 0;
+    }
 
-// Estate implementation
-Estate::Estate() : ResidentialBuilding(), address(""), numberOfUnits(0), numberOfResidents(0), buildingCost(1000) {}
 
-Estate::Estate(std::string address, int numberOfUnits, int numberOfResidents)
-    : address(address), numberOfUnits(numberOfUnits), numberOfResidents(numberOfResidents), buildingCost(1000) {}
+Estate:: Estate(std::string address, int maxCapacity) : ResidentialBuilding(), maxCapacity(maxCapacity) {
+        this->address = address;
+        this->buildingCost = 1000;
+        this->numberOfResidents = 0;
+    }
 
-float Estate::getBuildCost() {
-    return buildingCost;
+float Estate::getBuildCost() const {
+    return this->buildingCost; // return building cost for comparisons
 }
 
-int Estate::getNumberOfResidents() {
-    return numberOfResidents;
+ void Estate:: createAndAddTownHouse(std::string address, int numberOfResidents) {
+        if (numberUnits() < maxCapacity) {
+            TownHouse newTownHouse(address, numberOfResidents);
+            townhouses.push_back(newTownHouse);
+            this->numberOfResidents += newTownHouse.getNumberOfResidents();
+            this->buildingCost += newTownHouse.getBuildCost();
+        } else {
+            std::cout << "Error: Maximum capacity for Estate reached." << std::endl;
+        }
+    }
+void Estate::createAndAddHouse(std::string address, int numberOfResidents) {
+        if (numberUnits() < maxCapacity) {
+            House newHouse(address, numberOfResidents);
+            houses.push_back(newHouse);
+            this->numberOfResidents += newHouse.getNumberOfResidents();
+            this->buildingCost += newHouse.getBuildCost();
+        } else {
+            std::cout << "Error: Maximum capacity for Estate reached." << std::endl;
+        }
+    }
+
+void Estate::createAndAddFlat(std::string address, int numberOfResidents) {
+        if (numberUnits() < maxCapacity) {
+            Flat newFlat(address, numberOfResidents);
+            flats.push_back(newFlat);
+            this->numberOfResidents += newFlat.getNumberOfResidents();
+            this->buildingCost += newFlat.getBuildCost();
+        } else {
+            std::cout << "Error: Maximum capacity for Estatereached." << std::endl;
+        }
+    }
+
+int Estate::getNumberOfResidents() const {
+    return this->numberOfResidents;
 }
 
-int Estate::avergeResidentsPerUnit() {
-    avgPerUnit = numberOfResidents / numberOfUnits;
-    return avgPerUnit;
-}
 
-std::string Estate::getAddress() {
+
+std::string Estate::getAddress() const{
     return address;
 }
 
+int Estate::numberUnits() const{
+        return (houses.size() + flats.size()+townhouses.size());
+    }
+
 void Estate::print() const {
-    std::cout << "----------" << std::endl;
-    std::cout << "Estate Details: " << std::endl;
-    std::cout << "Address: " << address << std::endl;
-    std::cout << "Number of Units: " << numberOfUnits << std::endl;
-    std::cout << "Number Of Residents: " << numberOfResidents << std::endl;
-    std::cout << "Average Number Of Residents per unit: " << avgPerUnit << std::endl;
-    std::cout << "----------" << std::endl;
-}
+        std::cout << "----------" << std::endl;
+        std::cout << "Estate Details: " << std::endl;
+        std::cout << "Address: " << address << std::endl;
+        std::cout << "Estate Composition: " << std::endl;
+        std::cout << "Total Number of TownHouses: " << townhouses.size()<< std::endl;
+        std::cout << "Total Number of Houses: " << houses.size()<< std::endl;
+        std::cout << "Total Number of Flats: " << flats.size() << std::endl;
+        std::cout << "Total Number Of Residents: " << numberOfResidents << std::endl;
+        std::cout << "Building Cost: " << buildingCost << std::endl;
+        std::cout << "----------" << std::endl;
+    }
