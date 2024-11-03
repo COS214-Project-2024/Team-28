@@ -45,7 +45,8 @@ Monument::Monument() : Landmark() {
 }
 
 Monument::Monument(std::string location, std::string nameOfMonument, std::string date, std::string material, int condition)
-    : location(location), nameOfMonument(nameOfMonument), dateEstablished(date), materialUsed(material), condition(condition), buildingCost(90) {}
+    : location(location), nameOfMonument(nameOfMonument), materialUsed(material), dateEstablished(date), condition(condition), buildingCost(90) {
+}
 
 float Monument::getBuildCost() {
     return buildingCost;

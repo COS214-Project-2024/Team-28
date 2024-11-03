@@ -21,14 +21,18 @@
 # debug:
 # 	gdb ./main
 
-###############################################################################
+##############################################################################################################
 
 # CXX = g++
 # CXXFLAGS = -Wall -g
 
 # # List of source files
 # SOURCES = main.cpp Government.cpp CityManager.cpp PayTaxes.cpp PayLevies.cpp \
-#           EconomicGrowthStrategy.cpp SocialWelfareStrategy.cpp HighPopulationStrategy.cpp Citizen.cpp
+#           EconomicGrowthStrategy.cpp SocialWelfareStrategy.cpp HighPopulationStrategy.cpp Citizen.cpp \
+#           Services.cpp HealthServices.cpp EducationServices.cpp EntertainmentServices.cpp \
+#           SecurityServices.cpp TransportationServices.cpp PublicTransit.cpp Trains.cpp Airports.cpp Roads.cpp \
+# 			Worker.cpp Dependent.cpp \
+# 			Factories.cpp Warehouses.cpp LandMarks.cpp CommercialBuildings.cpp ResidentialBuildings.cpp
 
 # # Corresponding object files
 # OBJECTS = $(SOURCES:.cpp=.o)
@@ -56,37 +60,65 @@
 
 ####################################################################################################
 
-
+# Compiler
 CXX = g++
-CXXFLAGS = -Wall -g
+CXXFLAGS = -g -std=c++14
 
-# List of source files
-SOURCES = main.cpp Government.cpp CityManager.cpp PayTaxes.cpp PayLevies.cpp \
-          EconomicGrowthStrategy.cpp SocialWelfareStrategy.cpp HighPopulationStrategy.cpp Citizen.cpp \
-          Services.cpp HealthServices.cpp EducationServices.cpp EntertainmentServices.cpp \
-          SecurityServices.cpp TransportationServices.cpp PublicTransit.cpp Trains.cpp Airports.cpp Roads.cpp \
-		  Worker.cpp Dependent.cpp
+# Source files
+SOURCES = main.cpp \
+	Plant.cpp \
+	PlantState.cpp \
+	PlantsManager.cpp \
+	WastePlant.cpp \
+	WastePlantObserver.cpp \
+	WastePlantState.cpp \
+	WastePlantOperationalState.cpp \
+	WastePlantShutdownState.cpp \
+	WastePlantMaintenanceState.cpp \
+	PowerPlant.cpp \
+	PowerPlantObserver.cpp \
+	PowerPlantState.cpp \
+	PowerPlantOperationalState.cpp \
+	PowerPlantShutdownState.cpp \
+	PowerPlantOverloadState.cpp \
+	PowerHandler.cpp \
+	FaultHandler.cpp \
+	SewagePlant.cpp \
+	SewagePlantObserver.cpp \
+	SewagePlantState.cpp \
+	SewagePlantOperationalState.cpp \
+	SewagePlantShutdownState.cpp \
+	SewagePlantMaintenanceState.cpp \
+	CityManager.cpp \
+	WaterPlant.cpp \
+	WaterPlantObserver.cpp \
+	WaterPlantState.cpp \
+	WaterPlantRunningState.cpp
 
-# Corresponding object files
+# Object files
 OBJECTS = $(SOURCES:.cpp=.o)
 
-# Final executable
-EXEC = program
+# Executable
+EXECUTABLE = main
 
 # Default target
-all: $(EXEC)
+all: $(EXECUTABLE)
 
-$(EXEC): $(OBJECTS)
+# Link the executable
+$(EXECUTABLE): $(OBJECTS)
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
-# Rule to compile source files
+# Compile source files into object files
 %.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $<
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-# Clean up build artifacts
+# Run the executable
+run: $(EXECUTABLE)
+	./$(EXECUTABLE)
+
+# Clean up build files
 clean:
-	del *.o main.exe program.exe
+	rm -f $(OBJECTS) $(EXECUTABLE)
 
-# Run the program
-run: $(EXEC)
-	./$(EXEC)
+# Phony targets
+.PHONY: all clean run
