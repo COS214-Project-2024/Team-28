@@ -26,9 +26,12 @@ gh repo clone COS214-Project-2024/Team-28
     *Used to create different types of buildings and their subcategories*
      
       AbstractFactory:  `BuildingFactory`
+     
       ConcreteFactories: `ResidentialFactory`, `CommercialFactory`, etc.
+     
       AbstractProducts: `ResidentialBuilding`, `CommercialBuilding`, etc.
-      ConcreteProducts: `Houses`, `Warehouses`, `Plants`, etc.\
+     
+      ConcreteProducts: `Houses`, `Warehouses`, `Plants`, etc.
      
      **Random Abstract Factory Snippet**:
      ```c++
