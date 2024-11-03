@@ -1,6 +1,5 @@
 #ifndef CITYMANAGER_H
 #define CITYMANAGER_H
-
 #include <string>
 #include <vector>
 #include "Services.h"
@@ -17,6 +16,12 @@
 
 class CityManager {
 public:
+      CityManager(const std::string& managerName)
+        : name(managerName) {}
+
+    virtual ~CityManager() = default;
+    virtual void reportStatus() const = 0;
+    std::string getName() const { return name; }
     CityManager();
     void notifyCitizens(const std::string& message);
     void manageServices();
@@ -32,6 +37,9 @@ private:
     double entertainmentBudget;
     double securityBudget;
     double transportationBudget;
+  
+  protected:
+    std::string name;
 };
 
 #endif // CITYMANAGER_H

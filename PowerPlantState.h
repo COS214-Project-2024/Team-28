@@ -1,12 +1,16 @@
+
 #ifndef POWERPLANTSTATE_H
 #define POWERPLANTSTATE_H
+#include "PlantState.h"
 
-class PowerPlantState
+class PowerPlantState: public PlantState
 {
 private:
-    /* data */
 public:
-    PowerPlantState(/* args */);
-    ~PowerPlantState();
+    PowerPlantState() = default;
+    void handleState(Plant* plant) override;
+    std::string getStateName() override; 
+    virtual ~PowerPlantState() = default;
 };
-#endif
+
+#endif // POWERPLANTSTATE_H
