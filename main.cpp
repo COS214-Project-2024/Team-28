@@ -6,16 +6,17 @@
 #include "PowerPlantOverloadState.h"
 #include "PowerPlantShutdownState.h"
 #include "PowerPlant.h"
-#include "SewagePlantObserver.h"    
-#include "SewagePlant.h"            
-#include "WaterPlantObserver.h"     // Include WaterPlantObserver
-#include "WaterPlant.h"             // Include WaterPlant
+#include "SewagePlantObserver.h"
+#include "SewagePlant.h"
+#include "WaterPlantObserver.h" // Include WaterPlantObserver
+#include "WaterPlant.h"         // Include WaterPlant
 #include <memory>
 #include <iostream>
 #include <thread>
 #include <chrono>
 
-int main() {
+int main()
+{
     // --- WastePlant Testing ---
 
     // Create a WastePlant
@@ -30,11 +31,17 @@ int main() {
     std::cout << "Plant " << wastePlant.getPlantDetails()
               << " attached to manager " << wasteManager.getName() << std::endl;
 
-    std::cout << "\n--- Simulating state changes for WastePlant ---\n" << std::endl;
+    std::cout << "\n--- Simulating state changes for WastePlant ---\n"
+              << std::endl;
 
     // Simulate a state change to Maintenance
     wastePlant.performMaintenance();
 
+    // Test sewage handling system
+    std::cout << "\n--- Testing Waste Handling System ---\n"
+              << std::endl;
+    wasteManager.handleWaste("Pipe Blockage");
+    wasteManager.initiateFaultHandling("Emergency Overflow");
     // Simulate a state change to Shutdown after some time
     std::this_thread::sleep_for(std::chrono::seconds(2));
     wastePlant.stopPlant();
@@ -46,7 +53,6 @@ int main() {
     // Report status for WastePlant
     wasteManager.reportStatus();
 
-   
     // --- SewagePlant Testing ---
 
     // Create a SewagePlant
@@ -61,13 +67,15 @@ int main() {
     std::cout << "\nPlant " << sewagePlant.getPlantDetails()
               << " attached to manager " << sewageManager.getName() << std::endl;
 
-    std::cout << "\n--- Simulating state changes for SewagePlant ---\n" << std::endl;
+    std::cout << "\n--- Simulating state changes for SewagePlant ---\n"
+              << std::endl;
 
     // Simulate a state change to Maintenance
     sewagePlant.performMaintenance();
 
     // Test sewage handling system
-    std::cout << "\n--- Testing Sewage Handling System ---\n" << std::endl;
+    std::cout << "\n--- Testing Sewage Handling System ---\n"
+              << std::endl;
     sewageManager.handleSewageBlockage("Pipe Blockage");
     sewageManager.initiateFaultHandling("Emergency Overflow");
 
@@ -96,7 +104,8 @@ int main() {
     std::cout << "\nPlant " << waterPlant.getPlantDetails()
               << " attached to manager " << waterManager.getName() << std::endl;
 
-    std::cout << "\n--- Simulating state changes for WaterPlant ---\n" << std::endl;
+    std::cout << "\n--- Simulating state changes for WaterPlant ---\n"
+              << std::endl;
 
     // Simulate starting water treatment
     waterPlant.startWaterTreatment();
@@ -112,11 +121,15 @@ int main() {
     std::this_thread::sleep_for(std::chrono::seconds(2));
     waterPlant.startPlant();
 
+    std::cout << "\n--- Testing Water Handling System ---\n"
+              << std::endl;
+    waterManager.handleWater("Pipe Blockage");
+    waterManager.initiateFaultHandling("Emergency Overflow");
+
     // Report status for WaterPlant
     waterManager.reportStatus();
 
-
-// --- PowerPlant Testing ---
+    // --- PowerPlant Testing ---
 
     // Create a PowerPlant instance
     PowerPlant powerPlant("PowerPlant1", "Uptown", 500.0); // 500 MW capacity
@@ -130,10 +143,11 @@ int main() {
     std::cout << "Plant " << powerPlant.getPlantDetails()
               << " attached to manager " << powerManager.getName() << std::endl;
 
-    std::cout << "\n--- Simulating Normal Operations for PowerPlant ---\n" << std::endl;
+    std::cout << "\n--- Simulating Normal Operations for PowerPlant ---\n"
+              << std::endl;
 
     // Start the PowerPlant
-    powerPlant.startPlant(); // Should transition to Operating
+    powerPlant.startPlant();          // Should transition to Operating
     powerPlant.generateElectricity(); // Should generate electricity
 
     // Report status
@@ -142,7 +156,7 @@ int main() {
     std::cout << "\n--- Simulating Overload Fault for PowerPlant ---\n";
     // Simulate overload by increasing power output beyond capacity
     powerPlant.changePowerOutput(600.0); // Exceeds capacity, triggers Overload
-    powerPlant.generateElectricity(); // Should handle overload
+    powerPlant.generateElectricity();    // Should handle overload
 
     // Allow time for fault handling
     std::this_thread::sleep_for(std::chrono::seconds(2));
@@ -153,10 +167,9 @@ int main() {
 
     std::cout << "\n--- Initiating Shutdown for PowerPlant ---\n";
     // Stop the PowerPlant, triggering Shutdown
-    powerPlant.stopPlant(); // Should transition to Shutdown
+    powerPlant.stopPlant();           // Should transition to Shutdown
     powerPlant.generateElectricity(); // Should not generate electricity
 
- 
     std::this_thread::sleep_for(std::chrono::seconds(2));
 
     // Report status after shutdown
@@ -164,7 +177,7 @@ int main() {
     powerManager.reportStatus();
 
     std::cout << "\n--- Attempting Redundant Overload for PowerPlant ---\n";
-    powerPlant.changePowerOutput(700.0); 
+    powerPlant.changePowerOutput(700.0);
     powerPlant.generateElectricity();
 
     // Allow time for any fault handling

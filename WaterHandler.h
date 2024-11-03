@@ -6,10 +6,9 @@
 class WaterHandler : public PlantStateHandler
 {
 public:
-WaterHandler();
-virtual ~WaterHandler();
-  void handleRequest(PlantsManager* manager, const std::string& faultType) override;
+    WaterHandler();
+    virtual ~WaterHandler();
+    void handleRequest(PlantsManager *manager, const std::string &faultType) override;
 };
-
 
 #endif

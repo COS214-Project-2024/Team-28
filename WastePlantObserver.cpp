@@ -122,3 +122,17 @@ void WastePlantObserver::allocateResources() {
     std::cout << "Allocating resources for WastePlantObserver: " << name << std::endl;
     // Implement resource allocation logic here (e.g., budgeting, staffing)
 }
+
+
+void WastePlantObserver::handleWaste(const std::string& faultType) {
+    // Delegate handling to the chain of responsibility
+    std::cout << "SewagePlantObserver: Handling sewage blockage - " << faultType << std::endl;
+    if (wasteHandlerChain) {
+        wasteHandlerChain->handleRequest(this, faultType);
+    }
+    // After handling blockage, check if we need to restore operations
+    if (faultActive) {
+        restorePlantOperations();
+        faultActive = false;
+    }
+}

@@ -6,9 +6,9 @@
 class SewageHandler : public PlantStateHandler
 {
 public:
-   SewageHandler();                 // Default constructor
-    virtual ~SewageHandler();        // Declare virtual destructor
+    SewageHandler();          // Default constructor
+    virtual ~SewageHandler(); // Declare virtual destructor
 
-    void handleRequest(PlantsManager* manager, const std::string& faultType) override;
+    void handleRequest(PlantsManager *manager, const std::string &faultType) override;
 };
 #endif
