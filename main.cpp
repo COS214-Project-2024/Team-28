@@ -2,8 +2,12 @@
 #include "WastePlant.h"
 #include "PowerPlantObserver.h"
 #include "PowerPlant.h"
-#include "SewagePlantObserver.h"    // Include SewagePlantObserver
-#include "SewagePlant.h"            // Include SewagePlant
+#include "PowerPlantOperationalState.h"
+#include "PowerPlantOverloadState.h"
+#include "PowerPlantShutdownState.h"
+#include "PowerPlant.h"
+#include "SewagePlantObserver.h"    
+#include "SewagePlant.h"            
 #include "WaterPlantObserver.h"     // Include WaterPlantObserver
 #include "WaterPlant.h"             // Include WaterPlant
 #include <memory>
@@ -42,52 +46,7 @@ int main() {
     // Report status for WastePlant
     wasteManager.reportStatus();
 
-    // --- PowerPlant Testing ---
-
-    // Create a PowerPlant
-    PowerPlant powerPlant("PowerPlant1", "Uptown", 500.0); // 500 MW capacity
-
-    // Create a PowerPlantObserver
-    PowerPlantObserver powerManager("PowerManager1");
-
-    // Attach the PowerPlant to the PowerPlantObserver
-    powerManager.attach(&powerPlant);
-
-    std::cout << "\nPlant " << powerPlant.getPlantDetails()
-              << " attached to manager " << powerManager.getName() << std::endl;
-
-    std::cout << "\n--- Simulating state changes for PowerPlant ---\n" << std::endl;
-
-    // Simulate initial electricity generation
-    powerPlant.changePowerOutput(400.0); // Set initial output to 400 MW
-    powerPlant.generateElectricity();
-
-    // Report status for PowerPlant
-    powerManager.reportStatus();
-
-    std::cout << "\n--- Simulating Overload ---\n";
-    // Simulate increased power demand leading to overload
-    powerPlant.changePowerOutput(600.0); // Exceeds capacity to trigger overload
-    powerPlant.generateElectricity();
-
-    // Allow time for fault handling
-    std::this_thread::sleep_for(std::chrono::seconds(3));
-
-    // Report status after fault handling
-    std::cout << "\n--- Reporting Status After Overload Handling ---\n";
-    powerManager.reportStatus();
-
-    std::cout << "\n--- Initiating Maintenance ---\n";
-    // Simulate maintenance
-    powerPlant.performMaintenance();
-
-    // Allow time for maintenance
-    std::this_thread::sleep_for(std::chrono::seconds(3));
-
-    // Report final status for PowerPlant
-    std::cout << "\n--- Final Reporting Status ---\n";
-    powerManager.reportStatus();
-
+   
     // --- SewagePlant Testing ---
 
     // Create a SewagePlant
@@ -150,6 +109,70 @@ int main() {
 
     // Report status for WaterPlant
     waterManager.reportStatus();
+
+
+// --- PowerPlant Testing ---
+
+    // Create a PowerPlant instance
+    PowerPlant powerPlant("PowerPlant1", "Uptown", 500.0); // 500 MW capacity
+
+    // Create a PowerPlantObserver instance
+    PowerPlantObserver powerManager("PowerManager1");
+
+    // Attach the observer to the PowerPlant
+    powerManager.attach(&powerPlant);
+
+    std::cout << "Plant " << powerPlant.getPlantDetails()
+              << " attached to manager " << powerManager.getName() << std::endl;
+
+    std::cout << "\n--- Simulating Normal Operations for PowerPlant ---\n" << std::endl;
+
+    // Start the PowerPlant
+    powerPlant.startPlant(); // Should transition to Operating
+    powerPlant.generateElectricity(); // Should generate electricity
+
+    // Report status
+    powerManager.reportStatus();
+
+    std::cout << "\n--- Simulating Overload Fault for PowerPlant ---\n";
+    // Simulate overload by increasing power output beyond capacity
+    powerPlant.changePowerOutput(600.0); // Exceeds capacity, triggers Overload
+    powerPlant.generateElectricity(); // Should handle overload
+
+    // Allow time for fault handling
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+
+    // Report status after handling overload
+    std::cout << "\n--- Reporting Status After Overload Handling ---\n";
+    powerManager.reportStatus();
+
+    std::cout << "\n--- Initiating Shutdown for PowerPlant ---\n";
+    // Stop the PowerPlant, triggering Shutdown
+    powerPlant.stopPlant(); // Should transition to Shutdown
+    powerPlant.generateElectricity(); // Should not generate electricity
+
+    // Allow time for fault handling
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+
+    // Report status after shutdown
+    std::cout << "\n--- Reporting Status After Shutdown ---\n";
+    powerManager.reportStatus();
+
+    std::cout << "\n--- Attempting Redundant Shutdown for PowerPlant ---\n";
+    // Attempt to stop the plant again (should be ignored due to state check)
+    powerPlant.stopPlant();
+
+    std::cout << "\n--- Attempting Redundant Overload for PowerPlant ---\n";
+    // Attempt to trigger overload again (should be ignored if already in Shutdown)
+    powerPlant.changePowerOutput(700.0); // Attempting to set higher output
+    powerPlant.generateElectricity();
+
+    // Allow time for any fault handling
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+
+    // Final status report
+    std::cout << "\n--- Final Reporting Status for PowerPlant ---\n";
+    powerManager.reportStatus();
 
     return 0;
 }

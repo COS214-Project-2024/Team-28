@@ -1,17 +1,15 @@
+// PowerHandler.h
 #ifndef POWERHANDLER_H
 #define POWERHANDLER_H
-#include <string>
-#include "PlantStateHandler.h"
 
-class PowerHandler : public PlantStateHandler
-{
-private:
-    string powerPlantName;
+#include "FaultHandler.h"
+
+class PowerHandler : public FaultHandler {
 public:
-    PowerHandler(/* args */);
-    ~PowerHandler();
-    void restorePlantOperations() override;
-    void performRoutineMaintenance() override;
-    void changeState(string newState) override;
+    PowerHandler();                 // Default constructor
+    virtual ~PowerHandler();        // Declare virtual destructor
+    
+    void handleRequest(PlantsManager* manager, const std::string& faultType) override;
 };
-#endif
+
+#endif // POWERHANDLER_H

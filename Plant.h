@@ -29,7 +29,7 @@ public:
     virtual void stopPlant() = 0;
     virtual void performMaintenance() = 0;
     virtual std::string getPlantDetails() const = 0;
-    
+    // virtual void triggerFault(const std::string& faultType) = 0; 
     // Implementing IndustrialBuilding's pure virtual functions
     virtual void startOperation() = 0;
     virtual void stopOperation() = 0;

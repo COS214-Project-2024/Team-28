@@ -41,8 +41,13 @@ void PowerPlant::startPlant() {
     notifyManagers();
 }
 
-// Stop the power plant and transition to the Shutdown state
 void PowerPlant::stopPlant() {
+    // Added Implementation: Prevent redundant shutdown
+    if (getState() && getState()->getStateName() == "Shutdown") {
+        std::cout << "PowerPlant " << getPlantDetails() << " is already in Shutdown state." << std::endl;
+        return;
+    }
+
     std::cout << "Stopping Power Plant: " << getName() << std::endl;
     setState(new PowerPlantShutdownState());
     notifyManagers();

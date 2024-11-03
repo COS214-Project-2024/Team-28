@@ -1,10 +1,13 @@
+// PowerPlantObserver.cpp
 #include "PowerPlantObserver.h"
-#include "PlantState.h" // Ensure full definition of PlantState
-#include <algorithm>    // For std::find
+#include "Plant.h"
+#include "PowerPlant.h"
+#include <algorithm>
 #include <iostream>
-#include <thread>       // Include for std::this_thread
-#include <chrono>       // Include for std::chrono
+#include <thread>
+#include <chrono>
 
+// Override: Called when a plant's state changes
 void PowerPlantObserver::update(Plant* plant, PlantState* state) {
     std::cout << "Observer notified: " << plant->getPlantDetails() << std::endl;
 
@@ -13,8 +16,8 @@ void PowerPlantObserver::update(Plant* plant, PlantState* state) {
 
     if (stateName == "Shutdown") {
         initiateFaultHandling("Shutdown");
-    } else if (stateName == "PartialState") {
-        performRoutineMaintenance(plant);
+    } else if (stateName == "Overload") {
+        initiateFaultHandling("Overload");
     } else if (stateName == "Operating") {
         restorePlantOperations();
     }
@@ -24,11 +27,10 @@ void PowerPlantObserver::initiateFaultHandling(const std::string& faultType) {
     std::cout << "Initiating fault handling for: " << faultType << std::endl;
     faultActive = true;
 
-    // Simulate time delay for fault handling
-    std::this_thread::sleep_for(std::chrono::seconds(2));
-
-    std::cout << "Dispatching maintenance crew to handle the fault." << std::endl;
-    restorePlantOperations();
+    // Pass the handling to the fault handler chain
+    if (faultHandlerChain) {
+        faultHandlerChain->handleRequest(this, faultType);
+    }
 }
 
 void PowerPlantObserver::restorePlantOperations() {
@@ -41,6 +43,7 @@ void PowerPlantObserver::restorePlantOperations() {
         }
     }
     faultActive = false;
+    maintenanceInProgress = false;
 }
 
 void PowerPlantObserver::performRoutineMaintenance(Plant* plant) {
@@ -58,11 +61,12 @@ void PowerPlantObserver::performRoutineMaintenance(Plant* plant) {
 void PowerPlantObserver::changeState(Plant* plant, const std::string& newState) {
     if (newState == "Operating") {
         plant->startPlant();
-    } else if (newState == "PartialState") {
+    } else if (newState == "Overload") {
         plant->performMaintenance();
     } else if (newState == "Shutdown") {
         plant->stopPlant();
     }
+    // Additional state transitions can be handled here
 }
 
 void PowerPlantObserver::reportStatus() const {
@@ -79,4 +83,19 @@ void PowerPlantObserver::reportStatus() const {
 
 void PowerPlantObserver::allocateResources() {
     std::cout << "Allocating resources for PowerPlantObserver: " << name << std::endl;
+}
+
+// Specific method to handle power faults
+void PowerPlantObserver::handlePowerFault(const std::string& faultType) {
+    std::cout << "Handling power fault: " << faultType << std::endl;
+    // Implement specific fault handling for PowerPlant
+    // For example, initiate shutdown procedures
+    std::cout << "Shutting down the Power Plant due to fault: " << faultType << std::endl;
+    
+    // Iterate through all managed plants and shut them down
+    for(auto plant : plants){
+        plant->stopPlant();
+    }
+    
+    // Optionally, perform additional actions like notifying authorities, logging, etc.
 }
