@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <string>
-#include "Building.h"
+#include "IndustrialBuilding.h"
 
 class Warehouses : public IndustrialBuilding {
 private:
@@ -16,7 +16,7 @@ private:
     int numberOfWorkers;
 
 public:
-    explicit Warehouses(const std::string& name = "Default Warehouse");
+    explicit Warehouses(const std::string& name = "Default Warehouse", const std::string& location = "Default Location", int capacity = 100);
 
     void construct() override;
     void maintain() override;
@@ -30,6 +30,12 @@ public:
     // Warehouse-specific methods
     void addInventory(const std::string& item);
     bool removeInventory(const std::string& item);
+
+    // Implementing pure virtual functions from IndustrialBuilding
+    void startOperation() override;
+    void stopOperation() override;
+    void performInspection() override;
+    std::string getBuildingDetails() const override;
 };
 
 #endif // WAREHOUSES_H

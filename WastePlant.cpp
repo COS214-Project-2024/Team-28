@@ -102,3 +102,38 @@ void WastePlant::startWasteProcessing()
 //     adjustFaultProbability(factor);
 //     // Adjust capacity or other attributes if necessary
 //}
+
+void WastePlant::print() const {
+    std::cout << "WastePlant: " << name 
+              << "\nLocation: " << location 
+              << "\nCapacity: " << capacity 
+              << "\nNumber of Workers: " << numberOfWorkers << std::endl;
+}
+
+void WastePlant::construct() {
+    // Empty implementation
+}
+
+void WastePlant::maintain() {
+    // Empty implementation
+}
+
+void WastePlant::startProduction() {
+    // Empty implementation
+}
+
+void WastePlant::stopProduction() {
+    // Empty implementation
+}
+
+void WastePlant::hireWorker(const std::string& workerName) {
+    // Empty implementation
+}
+
+void WastePlant::allocateJobs() {
+    // Empty implementation
+}
+
+int WastePlant::getNumberOfWorkers() const {
+    return 0; // Default implementation
+}

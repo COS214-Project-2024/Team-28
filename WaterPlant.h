@@ -25,5 +25,15 @@ public:
     void stopOperation() override;
     void performInspection() override;
     std::string getBuildingDetails() const override;
+
+        // Implement missing pure virtual functions
+    void print() const override;
+    void construct() override;
+    void maintain() override;
+    void startProduction() override;
+    void stopProduction() override;
+    void hireWorker(const std::string& workerName) override;
+    void allocateJobs() override;
+    int getNumberOfWorkers() const override;
 };
 #endif

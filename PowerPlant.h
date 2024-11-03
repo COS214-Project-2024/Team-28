@@ -37,6 +37,16 @@ public:
     void handlePowerOverload();
     void changePowerOutput(double output);
     void reduceOutput(double percentage);
+
+        // Implement missing pure virtual functions
+    void print() const override;
+    void construct() override;
+    void maintain() override;
+    void startProduction() override;
+    void stopProduction() override;
+    void hireWorker(const std::string& workerName) override;
+    void allocateJobs() override;
+    int getNumberOfWorkers() const override;
 };
 
 #endif // POWERPLANT_H

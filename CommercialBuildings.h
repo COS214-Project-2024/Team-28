@@ -9,6 +9,7 @@
 #include <ctime>
 
 #include "Building.h"
+#include "IndustrialBuilding.h"
 
 class MallShop {
 public:

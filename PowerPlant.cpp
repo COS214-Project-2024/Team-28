@@ -98,3 +98,38 @@ void PowerPlant::reduceOutput(double percentage) {
 // PowerPlantState* PowerPlant::getPowerState() const {
 //     return powerState.get();
 // }
+
+void PowerPlant::print() const {
+    std::cout << "PowerPlant: " << getName() 
+              << "\nLocation: " << getLocation() 
+              << "\nCapacity: " << capacity 
+              << "\nPower Output: " << powerOutput << std::endl;
+}
+
+void PowerPlant::construct() {
+    // Empty implementation
+}
+
+void PowerPlant::maintain() {
+    // Empty implementation
+}
+
+void PowerPlant::startProduction() {
+    // Empty implementation
+}
+
+void PowerPlant::stopProduction() {
+    // Empty implementation
+}
+
+void PowerPlant::hireWorker(const std::string& workerName) {
+    // Empty implementation
+}
+
+void PowerPlant::allocateJobs() {
+    // Empty implementation
+}
+
+int PowerPlant::getNumberOfWorkers() const {
+    return 0; // Default implementation
+}

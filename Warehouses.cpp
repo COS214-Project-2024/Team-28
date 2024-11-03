@@ -2,12 +2,13 @@
 #include <iostream>
 #include <algorithm>
 
-Warehouses::Warehouses(const std::string& name)
-    : warehouseName(name)
-    , isOperational(false)
-    , productionStatus(false)
-    , maintenanceCount(0)
-    , numberOfWorkers(0) {}
+Warehouses::Warehouses(const std::string& name, const std::string& location, int capacity)
+    : IndustrialBuilding(name, location, capacity),
+      warehouseName(name),
+      isOperational(false),
+      productionStatus(false),
+      maintenanceCount(0),
+      numberOfWorkers(0) {}
 
 void Warehouses::construct() {
     std::cout << "Constructing new warehouse: " << warehouseName << "...\n";
@@ -25,10 +26,19 @@ void Warehouses::maintain() {
     }
 
     maintenanceCount++;
-    std::cout << "\nPerforming warehouse maintenance check #" << maintenanceCount << "\n";
-    std::cout << "1. Checking storage conditions...\n";
-    std::cout << "2. Inspecting security systems...\n";
-    std::cout << "3. Verifying ventilation...\n";
+    std::cout << "\nPerforming maintenance check #" << maintenanceCount << std::endl;
+    
+    std::cout << "1. Checking storage areas..." << std::endl;
+    std::cout << "2. Inspecting inventory..." << std::endl;
+    std::cout << "3. Verifying safety protocols..." << std::endl;
+
+    bool needsRepair = (maintenanceCount % 3 == 0);
+    
+    if (needsRepair) {
+        std::cout << "Repairs needed! Ordering materials..." << std::endl;
+        // Simulate ordering materials
+        std::cout << "Repairs completed with new materials" << std::endl;
+    }
 }
 
 void Warehouses::startProduction() {
@@ -50,7 +60,7 @@ void Warehouses::stopProduction() {
 void Warehouses::hireWorker(const std::string& workerName) {
     workers.push_back(workerName);
     numberOfWorkers++;
-    std::cout << "Worker " << workerName << " hired at warehouse: " << warehouseName << "\n";
+    std::cout << "Worker " << workerName << " hired at warehouse: " << warehouseName << std::endl;
 }
 
 void Warehouses::allocateJobs() {
@@ -78,20 +88,11 @@ void Warehouses::print() const {
 }
 
 void Warehouses::addInventory(const std::string& item) {
-    if (isOperational) {
-        inventory.push_back(item);
-        std::cout << "Added item to inventory: " << item << "\n";
-    } else {
-        std::cout << "Cannot add inventory: Warehouse is not operational\n";
-    }
+    inventory.push_back(item);
+    std::cout << "Added item to inventory: " << item << "\n";
 }
 
 bool Warehouses::removeInventory(const std::string& item) {
-    if (!isOperational) {
-        std::cout << "Cannot remove inventory: Warehouse is not operational\n";
-        return false;
-    }
-
     auto it = std::find(inventory.begin(), inventory.end(), item);
     if (it != inventory.end()) {
         inventory.erase(it);
@@ -100,4 +101,21 @@ bool Warehouses::removeInventory(const std::string& item) {
     }
     std::cout << "Item not found in inventory: " << item << "\n";
     return false;
+}
+
+// Implementing pure virtual functions from IndustrialBuilding
+void Warehouses::startOperation() {
+    std::cout << "Starting operation at warehouse: " << warehouseName << std::endl;
+}
+
+void Warehouses::stopOperation() {
+    std::cout << "Stopping operation at warehouse: " << warehouseName << std::endl;
+}
+
+void Warehouses::performInspection() {
+    std::cout << "Performing inspection at warehouse: " << warehouseName << std::endl;
+}
+
+std::string Warehouses::getBuildingDetails() const {
+    return "Warehouse Name: " + warehouseName + "\nLocation: " + getLocation() + "\nCapacity: " + std::to_string(getCapacity());
 }

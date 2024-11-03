@@ -38,6 +38,16 @@ public:
     void startSewageTreatment();
     void increaseCapacity(int newCapacity);
     SewagePlantState* getSewageState();
+
+       // Implement missing pure virtual functions
+    void print() const override;
+    void construct() override;
+    void maintain() override;
+    void startProduction() override;
+    void stopProduction() override;
+    void hireWorker(const std::string& workerName) override;
+    void allocateJobs() override;
+    int getNumberOfWorkers() const override;
 };
 
 #endif // SEWAGEPLANT_H

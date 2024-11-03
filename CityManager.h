@@ -20,7 +20,7 @@ public:
         : name(managerName) {}
 
     virtual ~CityManager() = default;
-    virtual void reportStatus() const = 0;
+    //virtual void reportStatus() const = 0;
     std::string getName() const { return name; }
     CityManager();
     void notifyCitizens(const std::string& message);

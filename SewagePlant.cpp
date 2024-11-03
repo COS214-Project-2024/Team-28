@@ -112,3 +112,38 @@ SewagePlantState* SewagePlant::getSewageState()
 {
     return dynamic_cast<SewagePlantState*>(getState());
 }
+
+void SewagePlant::print() const {
+    std::cout << "SewagePlant: " << getName() 
+              << "\nLocation: " << getLocation() 
+              << "\nCapacity: " << treatmentCapacity 
+              << "\nTreated Volume: " << treatedVolume << std::endl;
+}
+
+void SewagePlant::construct() {
+    // Empty implementation
+}
+
+void SewagePlant::maintain() {
+    // Empty implementation
+}
+
+void SewagePlant::startProduction() {
+    // Empty implementation
+}
+
+void SewagePlant::stopProduction() {
+    // Empty implementation
+}
+
+void SewagePlant::hireWorker(const std::string& workerName) {
+    // Empty implementation
+}
+
+void SewagePlant::allocateJobs() {
+    // Empty implementation
+}
+
+int SewagePlant::getNumberOfWorkers() const {
+    return 0; // Default implementation
+}

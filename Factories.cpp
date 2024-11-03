@@ -3,9 +3,9 @@
 #include <exception>
 
 // Constructor
-Factories::Factories(MaterialHub* hub, const std::string& name)
-    : materialHub(hub), 
-      factoryName(name), 
+Factories::Factories(MaterialHub* hub, const std::string& name, const std::string& location, int capacity)
+    : IndustrialBuilding(name, location, capacity), 
+      materialHub(hub), 
       isOperational(false), 
       productionStatus(false),
       maintenanceCount(0),
@@ -21,7 +21,7 @@ Factories::~Factories() {
 
 // Construct method
 void Factories::construct() {
-    std::cout << "Constructing new factory: " << factoryName << "..." << std::endl;
+    std::cout << "Constructing new factory: " << name << "..." << std::endl;
 
     try {
         Steel* steel = materialHub->createSteel();
@@ -74,7 +74,7 @@ void Factories::maintain() {
 void Factories::startProduction() {
     if (!productionStatus && isOperational) {
         productionStatus = true;
-        std::cout << "Production started at factory: " << factoryName << std::endl;
+        std::cout << "Production started at factory: " << name << std::endl;
     } else if (!isOperational) {
         std::cout << "Cannot start production: Factory is not operational" << std::endl;
     }
@@ -84,7 +84,7 @@ void Factories::startProduction() {
 void Factories::stopProduction() {
     if (productionStatus) {
         productionStatus = false;
-        std::cout << "Production stopped at factory: " << factoryName << std::endl;
+        std::cout << "Production stopped at factory: " << name << std::endl;
     }
 }
 
@@ -92,7 +92,7 @@ void Factories::stopProduction() {
 void Factories::hireWorker(const std::string& workerName) {
     workers.push_back(workerName);
     numberOfWorkers++;
-    std::cout << "Worker " << workerName << " hired at factory: " << factoryName << std::endl;
+    std::cout << "Worker " << workerName << " hired at factory: " << name << std::endl;
 }
 
 // Allocate jobs
@@ -101,7 +101,7 @@ void Factories::allocateJobs() {
         std::cout << "Cannot allocate jobs: Factory is not operational" << std::endl;
         return;
     }
-    std::cout << "Allocating jobs to workers at factory: " << factoryName << std::endl;
+    std::cout << "Allocating jobs to workers at factory: " << name << std::endl;
     for (const auto& worker : workers) {
         std::cout << "Job allocated to: " << worker << std::endl;
     }
@@ -114,11 +114,11 @@ int Factories::getNumberOfWorkers() const {
 
 // Print factory status
 void Factories::print() const {
-    std::cout << "Factory: " << factoryName 
+    std::cout << "Factory: " << name 
               << "\nOperational Status: " << (isOperational ? "Operational" : "Non-operational")
               << "\nNumber of Workers: " << numberOfWorkers 
               << "\nProduction Status: " << (productionStatus ? "Active" : "Inactive")
-              << "\nMaintenance Count: " << maintenanceCount << std::endl;
+              << "\nMaintenance Count: " << maintenanceCount << "\n";
 }
 
 // Check if factory is operational
@@ -129,4 +129,21 @@ bool Factories::isFactoryOperational() const {
 // Get maintenance count
 int Factories::getMaintenanceCount() const {
     return maintenanceCount;
+}
+
+// Implementing pure virtual functions from IndustrialBuilding
+void Factories::startOperation() {
+    std::cout << "Starting operation at factory: " << name << std::endl;
+}
+
+void Factories::stopOperation() {
+    std::cout << "Stopping operation at factory: " << name << std::endl;
+}
+
+void Factories::performInspection() {
+    std::cout << "Performing inspection at factory: " << name << std::endl;
+}
+
+std::string Factories::getBuildingDetails() const {
+    return "Factory Name: " + name + "\nLocation: " + location + "\nCapacity: " + std::to_string(capacity);
 }

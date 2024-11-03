@@ -87,3 +87,39 @@ std::string WaterPlant::getPlantDetails() const {
 std::string WaterPlant::getBuildingDetails() const {
     return getPlantDetails();
 }
+
+void WaterPlant::print() const {
+    std::cout << "WaterPlant: " << getName() 
+              << "\nLocation: " << getLocation() 
+              << "\nCapacity: " << getCapacity() 
+              << "\nPurification Level: " << purificationLevel 
+              << "\nNumber of Litres: " << NumberofLitres << std::endl;
+}
+
+void WaterPlant::construct() {
+    // Empty implementation
+}
+
+void WaterPlant::maintain() {
+    // Empty implementation
+}
+
+void WaterPlant::startProduction() {
+    // Empty implementation
+}
+
+void WaterPlant::stopProduction() {
+    // Empty implementation
+}
+
+void WaterPlant::hireWorker(const std::string& workerName) {
+    // Empty implementation
+}
+
+void WaterPlant::allocateJobs() {
+    // Empty implementation
+}
+
+int WaterPlant::getNumberOfWorkers() const {
+    return 0; // Default implementation
+}

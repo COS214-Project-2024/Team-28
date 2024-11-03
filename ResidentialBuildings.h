@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "Building.h"
+#include "IndustrialBuilding.h"
 
 class House : public ResidentialBuilding {
 public:

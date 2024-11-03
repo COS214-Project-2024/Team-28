@@ -4,6 +4,7 @@
 #include <iostream>
 #include "Building.h"
 #include "ResidentialBuildings.h"
+#include "IndustrialBuilding.h"
 
 
 //ABSTRACT FACTROY 

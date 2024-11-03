@@ -4,6 +4,7 @@
 
 #include "BuildingFactory.h"
 #include "LandMarks.h"
+#include "IndustrialBuilding.h"
 
 class LandMarkFactory : public BuildingFactory {
 public:
