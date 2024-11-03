@@ -10,6 +10,9 @@
       "externalConsole": true,
       "cwd": "c:/Users/Takudzwa Magunda/Desktop/214 final/Team-28",
       "program": "c:/Users/Takudzwa Magunda/Desktop/214 final/Team-28/build/Debug/outDebug",
+      "externalConsole": false,
+      "cwd": "/home/tiyiso/Team-28",
+      "program": "/home/tiyiso/Team-28/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
