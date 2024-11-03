@@ -23,26 +23,27 @@ gh repo clone COS214-Project-2024/Team-28
   ```
 # Design Patterns
   1. Abstract Factory
-    *Used to create different types of buildings and their subcategories*
      
-      AbstractFactory:  `BuildingFactory`
-     
-      ConcreteFactories: `ResidentialFactory`, `CommercialFactory`, etc.
-     
-      AbstractProducts: `ResidentialBuilding`, `CommercialBuilding`, etc.
-     
-      ConcreteProducts: `Houses`, `Warehouses`, `Plants`, etc.
-     
-     **Random Abstract Factory Snippet**:
-     ```c++
-       class CommercialBuilding : public Building {
-        public:
-            virtual ~CommercialBuilding() = default;
-            virtual float getBuildCost() const = 0;
-            virtual std::string getAddress() const = 0;
-            virtual void print() const = 0;
-        };
-     ```
+      *Used to create different types of buildings and their subcategories*
+       
+        AbstractFactory:  `BuildingFactory`
+       
+        ConcreteFactories: `ResidentialFactory`, `CommercialFactory`, etc.
+       
+        AbstractProducts: `ResidentialBuilding`, `CommercialBuilding`, etc.
+       
+        ConcreteProducts: `Houses`, `Warehouses`, `Plants`, etc.
+       
+       **Random Abstract Factory Snippet**:
+       ```c++
+         class CommercialBuilding : public Building {
+          public:
+              virtual ~CommercialBuilding() = default;
+              virtual float getBuildCost() const = 0;
+              virtual std::string getAddress() const = 0;
+              virtual void print() const = 0;
+          };
+       ```
 
   3. State
      
