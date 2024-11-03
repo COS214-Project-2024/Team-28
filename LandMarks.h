@@ -39,7 +39,6 @@ private:
     int condition;
     float buildingCost;
 };
-
 class Center : public Landmark {
 public:
     Center();
