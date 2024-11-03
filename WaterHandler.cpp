@@ -1,21 +1,16 @@
 #include "WaterHandler.h"
+#include "WaterPlantObserver.h"
 #include <iostream>
 
-WaterHandler::WaterHandler() {
-    waterPlantName = "WaterPlant1";
+
+WaterHandler::WaterHandler(): PlantStateHandler(){}
+
+WaterHandler::~WaterHandler(){
+
 }
 
-WaterHandler::~WaterHandler() {}
-
-void WaterHandler::restorePlantOperations() {
-    std::cout << "Restoring operations for " << waterPlantName << std::endl;
+void WaterHandler :: handleRequest(PlantsManager* manager, const std::string& faultType){
+      std::cout << "Fault: \"" << faultType << "\" passed by manager \"" 
+              << manager->getName() << "\" has been fixed by handler \"WaterHandler\"." 
+              << std::endl;
 }
-
-void WaterHandler::performRoutineMaintenance() {
-    std::cout << "Performing routine maintenance for " << waterPlantName << std::endl;
-}
-
-void WaterHandler::changeState(string newState) {
-    std::cout << "Changing state to " << newState << " for " << waterPlantName << std::endl;
-}
-

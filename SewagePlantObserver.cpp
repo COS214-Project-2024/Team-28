@@ -14,20 +14,18 @@
 void SewagePlantObserver::update(Plant* plant, PlantState* state) {
     std::cout << "Observer notified: " << plant->getPlantDetails() << std::endl;
 
-    // Detect state change and handle accordingly
     std::string stateName = state->getStateName();
 
     if (stateName == "Shutdown") {
-        initiateFaultHandling("Shutdown");
+        initiateFaultHandling("Blockage");
     } else if (stateName == "Failure") {
-        // Handle failure state if needed
-        // For example, initiate maintenance or shutdown
+
+         initiateFaultHandling("SewageFailure");
     } else if (stateName == "Operating") {
+
         restorePlantOperations();
     }
 
-    // Example: Track faults (this could be more elaborate)
-    // You might maintain a fault count or log here
 }
 
 // initiateFaultHandling Method Implementation
@@ -35,15 +33,10 @@ void SewagePlantObserver::initiateFaultHandling(const std::string& faultType) {
     std::cout << "Initiating fault handling for: " << faultType << std::endl;
     faultActive = true;
 
-    // Simulate time delay for fault handling
-    std::this_thread::sleep_for(std::chrono::seconds(2));
-
-    std::cout << "Dispatching maintenance crew to handle the fault." << std::endl;
-    // Optionally, set maintenance in progress
-    maintenanceInProgress = true;
-
-    // After handling, restore operations
-    restorePlantOperations();
+    // Pass the handling to the fault handler chain
+    if (blockageHandlerChain) {
+        blockageHandlerChain->handleRequest(this, faultType);
+    }
 }
 
 // restorePlantOperations Method Implementation

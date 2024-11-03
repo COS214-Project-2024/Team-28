@@ -22,6 +22,7 @@ SOURCES = main.cpp \
 	PowerPlantOverloadState.cpp \
 	PowerHandler.cpp \
 	SewagePlant.cpp \
+	SewageHandler.cpp \
 	SewagePlantObserver.cpp \
 	SewagePlantState.cpp \
 	SewagePlantOperationalState.cpp \

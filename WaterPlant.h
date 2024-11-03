@@ -4,6 +4,11 @@
 #include "WaterPlantState.h"
 #include "Plant.h"
 
+class WaterPlantContaminatedState;
+class WaterPlantRunningState;
+class WaterPlantTreatmentState;
+
+
 class WaterPlant : public Plant
 {
 private:

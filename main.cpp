@@ -142,11 +142,14 @@ int main() {
     // Allow time for fault handling
     std::this_thread::sleep_for(std::chrono::seconds(2));
 
+    // Report status after handling overload
+    std::cout << "\n--- Reporting Status After Overload Handling ---\n";
+    powerManager.reportStatus();
 
     std::cout << "\n--- Initiating Shutdown for PowerPlant ---\n";
     // Stop the PowerPlant, triggering Shutdown
-    powerPlant.stopPlant(); 
-    powerPlant.generateElectricity(); 
+    powerPlant.stopPlant(); // Should transition to Shutdown
+    powerPlant.generateElectricity(); // Should not generate electricity
 
  
     std::this_thread::sleep_for(std::chrono::seconds(2));

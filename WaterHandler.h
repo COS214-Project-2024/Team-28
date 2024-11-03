@@ -5,15 +5,11 @@
 
 class WaterHandler : public PlantStateHandler
 {
-private:
-    string waterPlantName;
-
 public:
-    WaterHandler(/* args */);
-    ~WaterHandler();
-    void restorePlantOperations() override;
-    void performRoutineMaintenance() override;
-    void changeState(string newState) override;
+WaterHandler();
+virtual ~WaterHandler();
+  void handleRequest(PlantsManager* manager, const std::string& faultType) override;
 };
+
 
 #endif

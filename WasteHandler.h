@@ -6,15 +6,10 @@
 using namespace std;
 
 class WasteHandler : public PlantStateHandler
-{
-private:
-    WastePlant *stationPointer;
+{public:
+ PowerHandler();                 // Default constructor
+    virtual ~PowerHandler();        // Declare virtual destructor
 
-public:
-    WasteHandler(/* args */);
-    ~WasteHandler();
-    void restorePlantOperations() override;
-    void performRoutineMaintenance() override;
-    void changeState(string newState) override;
+    void handleRequest(PlantsManager* manager, const std::string& faultType) override;
 };
 #endif

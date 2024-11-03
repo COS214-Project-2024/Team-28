@@ -5,13 +5,10 @@
 
 class SewageHandler : public PlantStateHandler
 {
-private:
-    string sewagePlantName;
 public:
-    SewageHandler(/* args */);
-    ~SewageHandler();
-    void restorePlantOperations() override;
-    void performRoutineMaintenance() override;
-    void changeState(string newState) override;
+   SewageHandler();                 // Default constructor
+    virtual ~SewageHandler();        // Declare virtual destructor
+
+    void handleRequest(PlantsManager* manager, const std::string& faultType) override;
 };
 #endif
