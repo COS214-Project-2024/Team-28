@@ -66,7 +66,9 @@ gh repo clone COS214-Project-2024/Team-28
     *Centralizes communication between plants and city departments.*
     
     Mediator: `CityManager`
-    ConcreteMediator: `PlantsManager`  
+    
+    ConcreteMediator: `PlantsManager`
+    
     Colleague: `BuildingsIterator`
 
     **Random Mediator Snippet**:
