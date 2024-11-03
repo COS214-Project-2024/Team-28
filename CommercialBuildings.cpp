@@ -2,8 +2,7 @@
 
 // MallShop implementation
 MallShop::MallShop(std::string name, std::string type, double size, double rent)
-    : name(name), type(type), size(size), rent(rent), revenue(0), operatingCosts(0), isOccupied(false) {
-}
+    : name(name), type(type), size(size), rent(rent), revenue(0), operatingCosts(0), isOccupied(false) {}
 
 double MallShop::calculateMonthlyRevenue() const {
     return revenue - operatingCosts - rent;
@@ -29,30 +28,31 @@ void MallShop::print() const {
 
 // EmergencySystem implementation
 void EmergencySystem::triggerEvacuation() {
-    std::cout << "Emergency evacuation triggered - all visitors evacuated" << std::endl;
+    isEvacuationActive = true;
+    currentEvacuationTime = 0;
 }
 
 void EmergencySystem::update(float deltaTime) {
-    // Update emergency system state
+    if (isEvacuationActive) {
+        currentEvacuationTime += deltaTime;
+        if (currentEvacuationTime >= 900.0f) {
+            isEvacuationActive = false;
+        }
+    }
 }
 
 // Mall implementation
-Mall::Mall()
-    : address(""), mallName(""), buildingCost(500), maxCapacity(0), currentVisitors(0), maxShops(2) {
-    taxRates["municipal"] = 0.02;
-    taxRates["property"] = 0.015;
-    taxRates["income"] = 0.03;
-}
+Mall::Mall() : CommercialBuilding(), address(""), mallName(""), maxCapacity(0), buildingCost(500), currentVisitors(0), maxShops(2) {}
 
 Mall::Mall(std::string address, std::string mallName, int maxCapacity)
-    : address(address), mallName(mallName), buildingCost(500), maxCapacity(maxCapacity), currentVisitors(0), maxShops(2) {
+    : address(address), mallName(mallName), maxCapacity(maxCapacity), buildingCost(500), currentVisitors(0), maxShops(2) {
     taxRates["municipal"] = 0.02;
     taxRates["property"] = 0.015;
     taxRates["income"] = 0.03;
 }
 
 void Mall::addShop(const MallShop& shop) {
-    if (shops.size() >= static_cast<size_t>(maxShops)) {
+    if (shops.size() >= maxShops) {
         throw std::runtime_error("Mall has reached maximum shop capacity");
     }
     shops.push_back(shop);
@@ -91,6 +91,7 @@ double Mall::calculateMonthlyTaxes() const {
 
 void Mall::triggerEmergencyEvacuation() {
     emergencySystem.triggerEvacuation();
+    currentVisitors = 0;
 }
 
 void Mall::scheduleRoutineMaintenance(const std::string& area, const std::time_t& date) {
@@ -117,12 +118,10 @@ void Mall::print() const {
 }
 
 // Shop implementation
-Shop::Shop() : CommercialBuilding(), address(""), shopName(""), typeOfShop(""), shopSize(0), buildingCost(50) {
-}
+Shop::Shop() : CommercialBuilding(), address(""), shopName(""), typeOfShop(""), shopSize(0), buildingCost(50) {}
 
 Shop::Shop(std::string address, std::string shopName, std::string typeOfShop, int shopSize)
-    : address(address), shopName(shopName), typeOfShop(typeOfShop), shopSize(shopSize), buildingCost(50) {
-}
+    : address(address), shopName(shopName), typeOfShop(typeOfShop), shopSize(shopSize), buildingCost(50) {}
 
 float Shop::getBuildCost() const {
     return buildingCost;
@@ -143,12 +142,10 @@ void Shop::print() const {
 }
 
 // Office implementation
-Office::Office() : CommercialBuilding(), address(""), companyName(""), typeOfCompany(""), officeSize(0), buildingCost(70) {
-}
+Office::Office() : CommercialBuilding(), address(""), companyName(""), typeOfCompany(""), officeSize(0), buildingCost(70) {}
 
 Office::Office(std::string address, std::string companyName, std::string typeOfCompany, int officeSize)
-    : address(address), companyName(companyName), typeOfCompany(typeOfCompany), officeSize(officeSize), buildingCost(70) {
-}
+    : address(address), companyName(companyName), typeOfCompany(typeOfCompany), officeSize(officeSize), buildingCost(70) {}
 
 float Office::getBuildCost() const {
     return buildingCost;
