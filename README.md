@@ -208,6 +208,7 @@ gh repo clone COS214-Project-2024/Team-28
       *Defines strategies in response to population growth and citizen satisfaction levels.*
       
       Context: `Government`
+      
       Strategies: Various policies or plans related to citizen welfare.
 
       **Random Strategy Snippet**:
