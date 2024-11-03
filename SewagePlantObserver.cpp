@@ -76,7 +76,18 @@ void SewagePlantObserver::performRoutineMaintenance(Plant* plant) {
 
     maintenanceInProgress = false;
 }
-
+// Add this to SewagePlantObserver.cpp
+void SewagePlantObserver::handleSewageBlockage(const std::string& faultType) {
+    std::cout << "SewagePlantObserver: Handling sewage blockage - " << faultType << std::endl;
+    if (blockageHandlerChain) {
+        blockageHandlerChain->handleRequest(this, faultType);
+    }
+    // After handling blockage, check if we need to restore operations
+    if (faultActive) {
+        restorePlantOperations();
+        faultActive = false;
+    }
+}
 // changeState Method Implementation
 void SewagePlantObserver::changeState(Plant* plant, const std::string& newState) {
     if (newState == "Operating") {

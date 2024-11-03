@@ -66,6 +66,11 @@ int main() {
     // Simulate a state change to Maintenance
     sewagePlant.performMaintenance();
 
+    // Test sewage handling system
+    std::cout << "\n--- Testing Sewage Handling System ---\n" << std::endl;
+    sewageManager.handleSewageBlockage("Pipe Blockage");
+    sewageManager.initiateFaultHandling("Emergency Overflow");
+
     // Simulate a state change to Shutdown after some time
     std::this_thread::sleep_for(std::chrono::seconds(2));
     sewagePlant.stopPlant();
