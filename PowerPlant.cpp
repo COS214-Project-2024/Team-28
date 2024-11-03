@@ -76,7 +76,7 @@ void PowerPlant::generateElectricity() {
     // if (Operational) {
     //     powerOutput = std::min(static_cast<double>(capacity), powerOutput); // Cast capacity to double
     //     std::cout << "Power Plant " << getName() << " is generating " << powerOutput << " MW of electricity." << std::endl;
-    // } else if (powerState->getStateName() == "Overload") {
+    // } else if (this->getState() == "Overload") {
     //     handlePowerOverload();
     // } else if (powerState->getStateName() == "Shutdown") {
     //     powerOutput = 0.0;
@@ -86,10 +86,6 @@ void PowerPlant::generateElectricity() {
 
 // Handle overload by transitioning to the Overload state
 void PowerPlant::handlePowerOverload() {
-    std::cout << "Power Plant " << getName() << " is overloaded! Transitioning to Overload state." << std::endl;
-    //powerState = std::make_unique<Overload>();
-    powerOutput *= 0.8; // Example: Reduce power output by 20%
-    std::cout << "Reduced power output to " << powerOutput << " MW to handle overload." << std::endl;
     notifyManagers();
 }
 

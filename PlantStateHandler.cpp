@@ -3,12 +3,10 @@
 #include "PlantsManager.h"
 #include <iostream>
 
-// Constructor
-PlantStateHandler::PlantStateHandler() : FaultHandler() {}
 
-// Destructor
+
 PlantStateHandler::~PlantStateHandler() {
-    // Any necessary cleanup can be done here
+   
 }
 
 // Override: Handle specific plant state faults

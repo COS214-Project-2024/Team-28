@@ -5,7 +5,7 @@
 #include "PlantsManager.h"
 #include "PlantState.h" 
 #include "PowerPlant.h"
-#include "FaultHandler.h"     // Added
+#include "PlantStateHandler.h"     // Added
 #include "PowerHandler.h"     // Added
 #include <iostream>
 #include <string>
@@ -15,7 +15,7 @@ public:
     // Constructor accepting a manager name
     PowerPlantObserver(const std::string& managerName)
         : PlantsManager(managerName), faultActive(false), maintenanceInProgress(false) {
-        // Initialize the fault handler chain
+        
         faultHandlerChain = new PowerHandler();
         // If there are more handlers, set them here using setNext
         // e.g., faultHandlerChain->setNext(new WaterHandler());
@@ -39,7 +39,7 @@ public:
     void handlePowerFault(const std::string& faultType);
 
 private:
-    FaultHandler* faultHandlerChain; // Head of the fault handler chain
+    PlantStateHandler* faultHandlerChain; // Head of the fault handler chain
     bool faultActive;
     bool maintenanceInProgress;
 };

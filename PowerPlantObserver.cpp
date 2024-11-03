@@ -10,10 +10,7 @@
 // Override: Called when a plant's state changes
 void PowerPlantObserver::update(Plant* plant, PlantState* state) {
     std::cout << "Observer notified: " << plant->getPlantDetails() << std::endl;
-
-    // Detect state change and handle accordingly
     std::string stateName = state->getStateName();
-
     if (stateName == "Shutdown") {
         initiateFaultHandling("Shutdown");
     } else if (stateName == "Overload") {
@@ -85,17 +82,19 @@ void PowerPlantObserver::allocateResources() {
     std::cout << "Allocating resources for PowerPlantObserver: " << name << std::endl;
 }
 
-// Specific method to handle power faults
+
 void PowerPlantObserver::handlePowerFault(const std::string& faultType) {
     std::cout << "Handling power fault: " << faultType << std::endl;
-    // Implement specific fault handling for PowerPlant
-    // For example, initiate shutdown procedures
-    std::cout << "Shutting down the Power Plant due to fault: " << faultType << std::endl;
+    std::cout << "Shutting down the Power to fix fault: " << faultType << std::endl;
     
-    // Iterate through all managed plants and shut them down
+  
     for(auto plant : plants){
         plant->stopPlant();
     }
-    
-    // Optionally, perform additional actions like notifying authorities, logging, etc.
+
+      std::cout << "Operations continuing " << faultType << std::endl;
+       for(auto plant : plants){
+        plant->startPlant();
+    }
+   
 }

@@ -7,6 +7,7 @@ SOURCES = main.cpp \
 	Plant.cpp \
 	PlantState.cpp \
 	PlantsManager.cpp \
+	PlantStateHandler.cpp \
 	WastePlant.cpp \
 	WastePlantObserver.cpp \
 	WastePlantState.cpp \
@@ -20,7 +21,6 @@ SOURCES = main.cpp \
 	PowerPlantShutdownState.cpp \
 	PowerPlantOverloadState.cpp \
 	PowerHandler.cpp \
-	FaultHandler.cpp \
 	SewagePlant.cpp \
 	SewagePlantObserver.cpp \
 	SewagePlantState.cpp \

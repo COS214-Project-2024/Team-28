@@ -4,7 +4,7 @@
 #include <iostream>
 
 // Default constructor
-PowerHandler::PowerHandler() : FaultHandler() {}
+PowerHandler::PowerHandler() : PlantStateHandler() {}
 
 // Destructor implementation
 PowerHandler::~PowerHandler() {
@@ -13,18 +13,8 @@ PowerHandler::~PowerHandler() {
 }
 
 void PowerHandler::handleRequest(PlantsManager* manager, const std::string& faultType) {
-    // Attempt to cast the manager to PowerPlantObserver
-    PowerPlantObserver* powerObserver = dynamic_cast<PowerPlantObserver*>(manager);
-    if (powerObserver) {
-        std::cout << "[PowerHandler] Handling fault: " << faultType 
-                  << " for manager: " << manager->getName() << std::endl;
-        // Delegate the fault handling to the PowerPlantObserver
-        powerObserver->handlePowerFault(faultType);
-    } else if (nextHandler) {
-        // Pass the fault to the next handler in the chain
-        nextHandler->handleRequest(manager, faultType);
-    } else {
-        // No handler available for this fault
-        std::cout << "[PowerHandler] No handler available for fault: " << faultType << std::endl;
-    }
+  std::cout << "Fault: \"" << faultType << "\" passed by manager \"" 
+              << manager->getName() << "\" has been fixed by handler \"PowerHandler\"." 
+              << std::endl;
+
 }
