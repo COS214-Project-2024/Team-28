@@ -1,162 +1,181 @@
 #ifndef COMMERCIALBUILDINGS_H
 #define COMMERCIALBUILDINGS_H
 
-
-//Concrete Products of the Commerical Building Abstract Product 
-//Shops, offices, malls.
-
-
 #include <iostream>
+#include <vector>
+#include <map>
+#include <string>
+#include <stdexcept>
+#include <ctime>
+
 #include "Building.h"
 
-class Shop: public CommercialBuilding{
-    public:
-     Shop():CommercialBuilding(){
-            this->address = "";
-            this->shopName = "";
-            this->typeOfShop = "";
-            this->shopSize = 0;
-            this->buildingCost = 50;
+/*-----------------------------------MALL-------------------------------------------------- */
+class MallShop {
+public:
+    MallShop(std::string name, std::string type, double size, double rent);
 
-        }
-        Shop(std::string address, std::string shopName, std::string typeOfShop,int shopSize ){
-            this->address = address;
-            this->shopName = shopName;
-            this->typeOfShop = typeOfShop;
-            this->shopSize = shopSize;
+    double calculateMonthlyRevenue() const;
+    void setRevenue(double rev);
+    void setOperatingCosts(double costs);
+    bool isVacant() const;
+    void print() const;
 
-        }
-        float getBuildCost(){
-            return this->buildingCost;          // return building cost for comparisons 
-        }
-        ~Shop() = default;
-        int getSize(){
-            return this->shopSize;
-        }
-        std::string getAddress(){   //We dont want same adresses 
-            return this->address;
-        }
-
-        void print() const override{
-            std::cout<<"----------"<<std::endl;
-            std::cout<<"Shop Details: "<<std::endl;
-            std::cout<<"Name: "<<shopName<<std::endl;
-            std::cout<<"Type: "<<typeOfShop<<std::endl;
-            std::cout<<"Address: "<<address<<std::endl;
-            std::cout<<"Shop Size Category "<<shopSize<<std::endl;
-            std::cout<<"----------"<<std::endl;
-        }
-
-
-    private:
-        std::string address;
-        std::string shopName;
-        std::string typeOfShop;
-        int shopSize;           // we will take taxes depoending on howw big the sie is, example shopSize 1 shops will pay 10, shopSize 2 will pay 20 etc
-        float buildingCost;
+private:
+    std::string name;
+    std::string type;
+    double size;
+    double rent;
+    double revenue;
+    double operatingCosts;
+    bool isOccupied;
 };
 
-class Office: public CommercialBuilding{
-    public:
-        Office():CommercialBuilding(){
-            this->address = "";
-            this->companyName = "";
-            this->typeOfCompany = "";
-            this->officeSize = 0;
-            this->buildingCost = 70;
+class EmergencySystem {
+public:
+    void triggerEvacuation();
+    void update(float deltaTime);
 
-        }
-        Office(std::string address, std::string companyName, std::string typeOfCompany,int officeSize ){
-            this->address = address;
-            this->companyName = companyName;
-            this->typeOfCompany = typeOfCompany;
-            this-> officeSize = officeSize;
-
-        }
-        float getBuildCost(){
-            return this->buildingCost;          // return building cost for comparisons 
-        }
-        ~Office() = default;
-        int getSize(){
-            return this->officeSize;
-        }
-        std::string getAddress(){   //We dont want same adresses 
-            return this->address;
-        }
-
-        void print() const override{
-            std::cout<<"----------"<<std::endl;
-            std::cout<<"Office Details: "<<std::endl;
-            std::cout<<"Name: "<<companyName<<std::endl;
-            std::cout<<"Type: "<<typeOfCompany<<std::endl;
-            std::cout<<"Address: "<<address<<std::endl;
-            std::cout<<"Office Size Category "<<officeSize<<std::endl;
-            std::cout<<"----------"<<std::endl;
-        }
-
-
-    private:
-        std::string address;
-        std::string companyName;
-        std::string typeOfCompany;
-        int officeSize;           // we will take taxes depoending on howw big the sie is, example shopSize 1 shops will pay 10, shopSize 2 will pay 20 etc
-        float buildingCost;
+private:
+    bool isEvacuationActive;
+    float currentEvacuationTime;
 };
 
+class Mall : public CommercialBuilding {
+public:
+    Mall();
+    Mall(std::string address, std::string mallName, int maxCapacity);
 
-class Mall: public CommercialBuilding{
-    public:
-     Mall():CommercialBuilding(){
-            this->address = "";
-            this->mallName = "";
-            this->numberOfStores = 0;
-            this->buildingCost = 500;
+    void addShop(const MallShop& shop);
+    void printShops() const;
+    bool admitVisitors(int count);
+    void exitVisitors(int count);
+    double calculateMonthlyTaxes() const;
+    void triggerEmergencyEvacuation();
+    void scheduleRoutineMaintenance(const std::string& area, const std::time_t& date);
 
-        }
-        Mall(std::string address, std::string mallName,int numberOfStores ){
-            this->address = address;
-            this->mallName = mallName;
-            this->numberOfStores= numberOfStores;
+    float getBuildCost() const override;
+    std::string getAddress() const override;
+    void print() const override;
 
-        }
-        float getBuildCost(){
-            return this->buildingCost;          // return building cost for comparisons 
-        }
-        ~Mall() = default;
-        int getSize(){
-            return this->numberOfStores;
-        }
-        std::string getAddress(){   //We dont want same adresses 
-            return this->address;
-        }
-
-        void print() const override{
-            std::cout<<"----------"<<std::endl;
-            std::cout<<"Mall Details: "<<std::endl;
-            std::cout<<"Mall Name: "<<mallName<<std::endl;
-            std::cout<<"Number of Stores: "<<numberOfStores<<std::endl;
-            std::cout<<"Address: "<<address<<std::endl;
-            std::cout<<"----------"<<std::endl;
-        }
-    /*
-        if we want mall to be made up of shops and offices
-         //getNumberOfUnits and buildCost will change 
-    */
-
-
-    private:
-        std::string address;
-        std::string mallName;
-        int numberOfStores;           // we will take taxes depoending on howw big the sie is, example shopSize 1 shops will pay 10, shopSize 2 will pay 20 etc
-        float buildingCost;
-       
-        //If we want a mall to be made up of diiferent shops and offices intead of stores
-        /*
-            Shop*  shops;
-            Office* offices;
-            */
+private:
+    std::string address;
+    std::string mallName;
+    float buildingCost;
+    int maxCapacity;
+    int currentVisitors;
+    const int maxShops;
+    std::vector<MallShop> shops;
+    EmergencySystem emergencySystem;
+    std::map<std::string, double> taxRates;
+    std::map<std::time_t, std::string> maintenanceSchedule;
 };
 
+/*-------------------------------------------------------------------------------------------------------*/
 
+/*---------------------------SHOP------------------------------------------------------------------------*/
+class ShopUnit {
+public:
+    ShopUnit(std::string name, std::string department, double size, double rent);
 
-#endif
+    double calculateMonthlyRevenue() const;
+    void setRevenue(double rev);
+    void setOperatingCosts(double costs);
+    bool isVacant() const;
+    void print() const;
+
+private:
+    std::string name;
+    std::string department; 
+    double size;        
+    double rent;
+    double revenue;
+    double operatingCosts;
+    bool isOccupied;
+};
+
+class Shop : public CommercialBuilding {
+public:
+    Shop();
+    Shop(std::string address, std::string shopName, int maxCapacity);
+
+    void addUnit(const ShopUnit& unit);
+    void printUnits() const;
+    bool admitCustomers(int count);
+    void exitCustomers(int count);
+    double calculateMonthlyTaxes() const;
+    void triggerEmergencyEvacuation();
+    void scheduleRoutineMaintenance(const std::string& area, const std::time_t& date);
+
+    float getBuildCost() const override;
+    std::string getAddress() const override;
+    void print() const override;
+
+private:
+    std::string address;
+    std::string shopName;
+    float buildingCost;
+    int maxCapacity;
+    int currentCustomers;
+    const int maxUnits;
+    std::vector<ShopUnit> units;
+    EmergencySystem emergencySystem;
+    std::map<std::string, double> taxRates;
+    std::map<std::time_t, std::string> maintenanceSchedule;
+};
+
+/*--------------------------------------------------------------------------------------------------*/
+
+/*-----------------------------------------OFFICE---------------------------------------------------*/
+class OfficeUnit {
+public:
+    OfficeUnit(std::string name, std::string department, double size, double rent);
+
+    double calculateMonthlyRevenue() const;
+    void setRevenue(double rev);
+    void setOperatingCosts(double costs);
+    bool isVacant() const;
+    void print() const;
+
+private:
+    std::string name; 
+    std::string department;  
+    double size;    
+    double rent;
+    double revenue;
+    double operatingCosts;
+    bool isOccupied;
+};
+
+class Office : public CommercialBuilding {
+public:
+    Office();
+    Office(std::string address, std::string companyName, int maxCapacity);
+
+    void addUnit(const OfficeUnit& unit);
+    void printUnits() const;
+    bool admitEmployees(int count);
+    void exitEmployees(int count);
+    double calculateMonthlyTaxes() const;
+    void triggerEmergencyEvacuation();
+    void scheduleRoutineMaintenance(const std::string& area, const std::time_t& date);
+
+    float getBuildCost() const override;
+    std::string getAddress() const override;
+    void print() const override;
+
+private:
+    std::string address;
+    std::string companyName;
+    float buildingCost;
+    int maxCapacity;
+    int currentEmployees;
+    const int maxUnits;
+    std::vector<OfficeUnit> units;
+    EmergencySystem emergencySystem;
+    std::map<std::string, double> taxRates;
+    std::map<std::time_t, std::string> maintenanceSchedule;
+};
+/*--------------------------------------------------------------------------------------------------*/
+
+#endif // COMMERCIALBUILDINGS_H

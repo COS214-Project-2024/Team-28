@@ -3,7 +3,7 @@
 
 #include "Materials.h"
 
-// MaterialHub (Facade)
+// Base MaterialHub class
 class MaterialHub {
 public:
     virtual ~MaterialHub() = default;
@@ -12,8 +12,8 @@ public:
     virtual Wood* createWood() = 0;
 };
 
-// Concrete MaterialHub builders
-class SteelBuilder : public MaterialHub {
+// Concrete MaterialHub builders - now properly inheriting from MaterialHub
+class SteelBuilder : public MaterialHub {  // Note the public inheritance here
 public:
     Steel* createSteel() override {
         return new SteelMaterial();
@@ -28,7 +28,7 @@ public:
     }
 };
 
-class ConcreteBuilder : public MaterialHub {
+class ConcreteBuilder : public MaterialHub {  // Note the public inheritance here
 public:
     Steel* createSteel() override {
         return new SteelMaterial();
@@ -43,7 +43,7 @@ public:
     }
 };
 
-class WoodMaker : public MaterialHub {
+class WoodMaker : public MaterialHub {  // Note the public inheritance here
 public:
     Steel* createSteel() override {
         return new SteelMaterial();

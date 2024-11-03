@@ -17,13 +17,6 @@ public:
         return new Mall();
     }
 
-
-
-    
-
-    // Returns nullptr for other types as CommercialBuildingFactory only creates residential buildings
-    
-
     ResidentialBuilding* createHouse() const override {return nullptr;}
     ResidentialBuilding* createFlat() const override {return nullptr;}
     ResidentialBuilding* createTownHouse() const override {return nullptr;}

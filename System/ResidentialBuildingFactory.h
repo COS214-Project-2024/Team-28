@@ -22,7 +22,6 @@ public:
     ResidentialBuilding* createEstate() const override {
         return new Estate();
     }
-
     // Returns nullptr for other types as ResidentialBuildingFactory only creates residential buildings
     CommercialBuilding* createShop() const override { return nullptr; }
     CommercialBuilding* createOffice() const override { return nullptr; }

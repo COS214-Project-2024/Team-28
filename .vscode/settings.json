@@ -122,6 +122,14 @@
     "stdexcept": "cpp",
     "streambuf": "cpp",
     "typeinfo": "cpp",
-    "industrialbuiliding": "cpp"
+    "industrialbuiliding": "cpp",
+    "chrono": "cpp",
+    "ctime": "cpp",
+    "map": "cpp",
+    "ratio": "cpp",
+    "semaphore": "cpp",
+    "stop_token": "cpp",
+    "thread": "cpp",
+    "sstream": "cpp"
   }
 }

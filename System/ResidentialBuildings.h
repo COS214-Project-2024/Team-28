@@ -53,6 +53,7 @@ private:
     float buildingCost;
 };
 
+
 class Estate : public ResidentialBuilding {
 public:
     Estate();
@@ -80,10 +81,10 @@ public:
     void print() const override;
 
 private:
-    std::string address; // address
-    float buildingCost; // cost to build the house, default is 1000             
-    int numberOfResidents;  
-    int maxCapacity;   // Maximum number of buildings
+    std::string address;
+    float buildingCost;         
+    int numberOfResidents;
+    int maxCapacity; 
 
     std::vector<TownHouse> townhouses;
     std::vector<House> houses;

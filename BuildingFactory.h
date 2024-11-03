@@ -33,7 +33,6 @@ public:
     virtual Landmark* createMonument() const = 0;
     virtual Landmark* createCenters() const = 0;
 
-    //Industrials
 };
 
 
