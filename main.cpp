@@ -2,6 +2,9 @@
 #include <vector>
 #include <thread>
 #include <chrono>
+#include <fstream>
+#include <sstream>
+#include "httplib.h"
 #include "BuildingFactory.h"
 #include "LandMarkFactory.h"
 #include "CommercialBuildingFactory.h"
@@ -35,12 +38,9 @@
 #include "PowerPlantOperationalState.h"
 #include "PowerPlantOverloadState.h"
 #include "PowerPlantShutdownState.h"
-#include "PowerPlant.h"
-#include "SewagePlantObserver.h"    
-#include "SewagePlant.h"            
-#include "WaterPlantObserver.h"     
-#include "WaterPlant.h" 
-#include "httplib.h"            
+#include "SewagePlantObserver.h"
+#include "WaterPlantObserver.h"
+#include "WaterPlant.h"
 
 void printCitizenSatisfaction(const std::vector<Citizen>& citizens) {
     for (const auto& citizen : citizens) {
@@ -120,9 +120,26 @@ void testMallOperations(Mall* mall) {
 
 int main() {
     httplib::Server server;
+    CityManager cityManager;
+    Government government;
+    PayTaxes payTaxes(&cityManager);
+    PayLevies payLevies(&cityManager);
+    EconomicGrowthStrategy economicGrowthStrategy;
+    SocialWelfareStrategy socialWelfareStrategy;
+    HighPopulationStrategy highPopulationStrategy;
+    std::vector<Citizen> citizens;
 
     server.Get("/", [](const httplib::Request& req, httplib::Response& res) {
-        res.set_content("Welcome to the City Sim Interface", "text/plain");
+        std::ifstream file("index.html");
+        if (file) {
+            std::stringstream buffer;
+            buffer << file.rdbuf();
+            res.set_content(buffer.str(), "text/html");
+        } else {
+            res.status = 404;
+            res.set_content("File not found", "text/html");
+        }
+        res.set_header("Access-Control-Allow-Origin", "*");
     });
 
     server.Get("/buildings", [](const httplib::Request& req, httplib::Response& res) {
@@ -132,15 +149,53 @@ int main() {
         response += "3. Industrial\n";
         response += "4. Landmarks\n";
         res.set_content(response, "text/plain");
+        res.set_header("Access-Control-Allow-Origin", "*");
     });
 
-    server.Get("/buildings/residential", [](const httplib::Request& req, httplib::Response& res) {
-        std::string response = "Residential Building Types:\n";
-        response += "1. House\n";
-        response += "2. Flat\n";
-        response += "3. Town House\n";
-        response += "4. Estate\n";
+    server.Post("/buildings/residential/create",[] (const httplib::Request& req, httplib::Response& res) {
+        std::string response = "Creating Building...\n";
+        
+        std::string type = req.get_param_value("type");
+        if(type=="House"){
+            std::string builingAddress = req.get_param_value("address");
+            int numberOfResidents = std::stoi(req.get_param_value("residents"));
+            House *house = new House(builingAddress, numberOfResidents);
+        }
+        else if(type=="Town House"){
+            std::string builingAddress = req.get_param_value("address");
+            int numberOfResidents = std::stoi(req.get_param_value("residents"));
+            TownHouse *townHouse = new TownHouse(builingAddress, numberOfResidents);
+        }
+        else if(type=="Flat"){
+
+        }
+        else if(type=="Estate"){
+            std::string builingAddress = req.get_param_value("address");
+            int numberOfResidents = std::stoi(req.get_param_value("residents"));
+            int numberOfUnits = std::stoi(req.get_param_value("units"));
+            Estate *estate = new Estate(builingAddress, numberOfUnits, numberOfResidents);
+        }
+
+    });
+
+    server.Post("/citizens/create", [&government, &citizens](const httplib::Request& req, httplib::Response& res) {
+        std::string response = "Creating Citizen...\n";
+        std::string type = req.get_param_value("worker");
+
+        bool hasHouse = req.get_param_value("hasHouse") == "true";
+        if(type == "Worker"){
+            double income = std::stod(req.get_param_value("income"));
+            Worker worker(&government, hasHouse, income);
+            citizens.push_back(worker);
+            response += "Worker created: \n";
+        } else if(type == "Dependent"){ 
+            Dependent dependent(&government, std::stod(req.get_param_value("income")));
+            citizens.push_back(dependent);
+            response += "Dependent created: \n";
+        }        
+        response += "Citizen created \n";
         res.set_content(response, "text/plain");
+        res.set_header("Access-Control-Allow-Origin", "*");
     });
 
     std::cout << "City Sim Server is running at http://localhost:8080" << std::endl;

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City Sim Interface</title>
+    <style>
+        .citizen-container, .building-container {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .citizen-icon, .building-icon {
+            width: 50px;
+            height: 50px;
+            background-color: #ccc;
+            border-radius: 50%;
+            margin: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+    </style>
+    <script>
+        async function fetchWelcomeMessage() {
+            const response = await fetch('http://localhost:8080/');
+            const text = await response.text();
+            document.getElementById('welcome-message').innerText = text;
+        }
+
+        async function fetchBuildingTypes() {
+            const response = await fetch('http://localhost:8080/buildings');
+            const text = await response.text();
+            document.getElementById('building-types').innerText = text;
+        }
+
+        async function createResidentialBuilding() {
+            const type = document.getElementById('building-type').value;
+            const address = document.getElementById('building-address').value;
+            const residents = document.getElementById('building-residents').value;
+            const units = document.getElementById('building-units').value;
+            const response = await fetch('http://localhost:8080/buildings/residential/create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `type=${type}&address=${address}&residents=${residents}&units=${units}`
+            });
+            const text = await response.text();
+            document.getElementById('create-building-response').innerText = text;
+            addBuildingIcon(type);
+        }
+
+        function addCitizenIcon() {
+            const container = document.getElementById('citizen-container');
+            const icon = document.createElement('div');
+            icon.className = 'citizen-icon';
+            icon.innerText = '👤';
+            container.appendChild(icon);
+        }
+
+        function addBuildingIcon(type) {
+            const container = document.getElementById('building-container');
+            const icon = document.createElement('div');
+            icon.className = 'building-icon';
+            icon.innerText = type[0]; // Use the first letter of the building type as the icon
+            container.appendChild(icon);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchWelcomeMessage();
+            fetchBuildingTypes();
+        });
+    </script>
+</head>
+<body>
+    <h1>City Sim Interface</h1>
+    <div id="welcome-message"></div>
+    <h2>Building Types</h2>
+    <div id="building-types"></div>
+    <h2>Create Residential Building</h2>
+    <form onsubmit="event.preventDefault(); createResidentialBuilding();">
+        <label for="building-type">Type:</label>
+        <select id="building-type">
+            <option value="House">House</option>
+            <option value="Town House">Town House</option>
+            <option value="Flat">Flat</option>
+            <option value="Estate">Estate</option>
+        </select>
+        <br>
+        <label for="building-address">Address:</label>
+        <input type="text" id="building-address" required>
+        <br>
+        <label for="building-residents">Number of Residents:</label>
+        <input type="number" id="building-residents" required>
+        <br>
+        <label for="building-units">Number of Units (for Estate):</label>
+        <input type="number" id="building-units">
+        <br>
+        <button type="submit">Create Building</button>
+    </form>
+    <div id="create-building-response"></div>
+    <h2>Citizens</h2>
+    <div id="citizen-container" class="citizen-container"></div>
+    <h2>Buildings</h2>
+    <div id="building-container" class="building-container"></div>
+</body>
+</html>
