@@ -1,11 +1,11 @@
 # Watch Rome get built in a day :)
 
 # Table of Content
--[Overview](#overview)
-- [To get started, clone the repository](#to-get-started-clone-the-repository)
-- [Building and Running the Project](#building-and-running-the-project)
-- [Design Patterns](#design-patterns)
-- [Unit Testing](#unit-testing)
+  - [Overview](#overview)
+  - [To get started, clone the repository](#to-get-started-clone-the-repository)
+  - [Building and Running the Project](#building-and-running-the-project)
+  - [Design Patterns](#design-patterns)
+  - [Unit Testing](#unit-testing)
 
 ## Overview
 The City Builder Simulation is a program that models a dynamic urban environment, where various types of buildings, plants, and services interact under different design patterns to simulate city management. This project utilizes several object-oriented design patterns, each responsible for a specific aspect of the simulation, ensuring modularity and scalability.
