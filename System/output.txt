@@ -1,0 +1,163 @@
+----------
+Park Details: 
+Name: Central Park
+Date Opened: 1858
+Condition: 5
+Address: 123 Park Ave
+----------
+----------
+Monument Details: 
+Name: Liberty Bell
+Date Created: 1753
+Material: Bronze
+Condition: 4
+Location: 456 Monument St
+----------
+----------
+Center Details: 
+Name: Community Center
+Description: 
+Date Opened: 2000
+Condition: 3
+Address: 789 Center Rd
+----------
+----------
+House Details: 
+Address: somewhere
+Number Of Residents: 18
+----------
+----------
+Flat Details: 
+Address: nowhere
+Number Of Residents: 100
+----------
+----------
+Townhouse Details: 
+Address: up
+Number Of Residents: 4
+----------
+----------
+Shop Details: 
+Name: KrabbyPatty
+Type: Restaurant
+Address: bikini-bottom
+Shop Size Category: 1
+----------
+----------
+Office Details: 
+Name: EASPORTS
+Type: GAMING
+Address: 184 drive
+Office Size Category: 1
+----------
+
+/*----------------------- MALL SIMULATION -----------------------*/
+
+Testing shop management...
+Added Fashion Store
+Added Food Court
+Error adding shops: Mall has reached maximum shop capacity
+Shop Name: Fashion Store, Type: Clothing, Area: Clothing, Rent: 5000, Revenue: 0, Operating Costs: 0
+Shop Name: Food Court, Type: Restaurant, Area: Restaurant, Rent: 8000, Revenue: 0, Operating Costs: 0
+
+Testing visitor management...
+Successfully admitted 500 visitors
+Prevented overcrowding: Cannot admit 2000 more visitors
+
+Testing emergency system...
+Emergency evacuation triggered - all visitors evacuated
+
+Testing maintenance scheduling...
+Maintenance tasks scheduled
+
+Testing financial calculations...
+Monthly taxes due: $-845
+
+Final mall state:
+----------
+Mall Details: 
+Mall Name: Mall of Africa
+Address: Midrand
+Current Visitors: 0/2000
+Number of Shops: 2/2
+Monthly Tax Due: $-845
+----------
+==================================MALL DONE===========================================
+/*----------------------- INDUSTRIAL -----------------------*/
+
+=== Testing Factory Creation and Basic Operations ===
+Constructing new factory: Default Factory...
+Basic infrastructure created:
+- Steel framework installed
+- Concrete foundation laid
+- Wood supports added
+Factory construction completed. Status: Operational
+Worker John Smith hired at factory: Default Factory
+Worker Jane Doe hired at factory: Default Factory
+Worker Bob Wilson hired at factory: Default Factory
+Allocating jobs to workers at factory: Default Factory
+Job allocated to: John Smith
+Job allocated to: Jane Doe
+Job allocated to: Bob Wilson
+Production started at factory: Default Factory
+
+Performing maintenance check #1
+1. Checking machinery...
+2. Inspecting material storage...
+3. Verifying safety protocols...
+
+Performing maintenance check #2
+1. Checking machinery...
+2. Inspecting material storage...
+3. Verifying safety protocols...
+
+Performing maintenance check #3
+1. Checking machinery...
+2. Inspecting material storage...
+3. Verifying safety protocols...
+Repairs needed! Ordering materials...
+Repairs completed with new materials
+Production stopped at factory: Default Factory
+
+=== Factory Status ===
+Factory: Default Factory
+Operational Status: Operational
+Number of Workers: 3
+Production Status: Inactive
+Maintenance Count: 3
+
+=== Testing Warehouse Creation and Operations ===
+Constructing new warehouse: Default Warehouse...
+Setting up storage areas...
+Installing inventory management systems...
+Setting up loading docks...
+Warehouse construction completed. Status: Operational
+Worker Alice Johnson hired at warehouse: Default Warehouse
+Worker Charlie Brown hired at warehouse: Default Warehouse
+Allocating warehouse tasks to workers at: Default Warehouse
+Assigning storage management to: Alice Johnson
+Assigning storage management to: Charlie Brown
+
+Performing warehouse maintenance check #1
+1. Checking storage conditions...
+2. Inspecting security systems...
+3. Verifying ventilation...
+
+Performing warehouse maintenance check #2
+1. Checking storage conditions...
+2. Inspecting security systems...
+3. Verifying ventilation...
+Warehouse operations started at: Default Warehouse
+Warehouse operations stopped at: Default Warehouse
+
+=== Warehouse Status ===
+Warehouse: Default Warehouse
+Operational Status: Operational
+Number of Workers: 2
+Operation Status: Inactive
+Maintenance Count: 2
+Inventory Items: 0
+
+=== Testing Error Handling ===
+Cannot start production: Factory is not operational
+Cannot allocate jobs: Factory is not operational
