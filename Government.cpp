@@ -88,3 +88,30 @@ void Government::payTaxes() {
         }
     }
 }
+
+void Government::manageResidentialBuildings(const std::vector<ResidentialBuilding*>& buildings, BuildingFactory* factory, int expectedNumber) {
+    int numberOfBuildings = buildings.size();
+    std::cout << "Number of residential buildings: " << numberOfBuildings << std::endl;
+
+    if (numberOfBuildings > expectedNumber) {
+        std::cout << "Number of buildings exceeds the expected number. Creating a new building..." << std::endl;
+        ResidentialBuilding* newBuilding = factory->createHouse(); // Example: creating a new house
+        if (newBuilding) {
+            std::cout << "New building created." << std::endl;
+        } else {
+            std::cout << "Failed to create a new building." << std::endl;
+        }
+    }
+}
+
+void Government::checkEstateResidentsAndTriggerStrategy(Estate* estate, int expectedResidents) {
+    int numberOfResidents = estate->getNumberOfResidents();
+    std::cout << "Number of residents in the estate: " << numberOfResidents << std::endl;
+
+    if (numberOfResidents > expectedResidents) {
+        std::cout << "Number of residents exceeds the expected number. Triggering High Population Strategy..." << std::endl;
+        HighPopulationStrategy highPopulationStrategy;
+        setStrategy(&highPopulationStrategy);
+        executeStrategy();
+    }
+}

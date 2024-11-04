@@ -7,6 +7,9 @@
 #include "Strategy.h"
 #include "Citizen.h"
 #include "Worker.h"
+#include "ResidentialBuildings.h"
+#include "BuildingFactory.h"
+#include "HighPopulationStrategy.h"
 
 class Government {
 public:
@@ -28,6 +31,8 @@ public:
     void updateEconomicSituation(int policyEffect, int taxEffect, int economicEffect);
     int getEconomicSituation() const;
     void payTaxes();
+    void manageResidentialBuildings(const std::vector<ResidentialBuilding*>& buildings, BuildingFactory* factory, int expectedNumber);
+    void checkEstateResidentsAndTriggerStrategy(Estate* estate, int expectedResidents);
 
 private:
     double budget;

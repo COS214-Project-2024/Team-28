@@ -5,7 +5,7 @@
 #include "BuildingFactory.h"
 #include "CommercialBuildings.h"
 
-class CommericalBuildingFactory : public BuildingFactory {
+class CommercialBuildingFactory : public BuildingFactory {
 public:
     CommercialBuilding* createShop() const override { 
         return new Shop();
