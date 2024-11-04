@@ -157,7 +157,7 @@ gh repo clone COS214-Project-2024/Team-28
         void Government::increaseTaxesAndLevies() {
             taxRate += 0.05; // Example increase
             levyRate += 5; // Example increase
-            updateEconomicSituation(0, -5, -5); // Negative effect on economic situation
+            updateEconomicSituation(0, -5, -5);
         }
       ```
 
@@ -268,7 +268,7 @@ gh repo clone COS214-Project-2024/Team-28
 
     // Basic Factory Tests
     static void testFactoryCreation() {
-        MaterialHub* hub = new SteelBuilder();  // Changed from MaterialHub to SteelBuilder
+        MaterialHub* hub = new SteelBuilder();
         Factories factory(hub, "Test Factory");
         bool passed = !factory.isFactoryOperational() && 
                      factory.getNumberOfWorkers() == 0 &&
