@@ -223,7 +223,51 @@ gh repo clone COS214-Project-2024/Team-28
             }
         }
       ```
+# Unit Testing
+ ## Commercial Unit Testing
+   **Test Cases**:
+   1. Unit Creation and Initialization Tests
+   2. Financial Calculations Tests
+   3. Capacity Management Tests
+   4. Emergency System Tests
+   5. Property Management Tests
+   6. Data Validation Tests
+   7. Building-Specific Features
+```c++
+    static void printTestResult(const std::string& testName, bool passed) {
+        std::cout << (passed ? "[PASS] " : "[FAIL] ") << testName << std::endl;
+    }
 
-   
+    // Mall Tests
+    static void testMallShopCreation() {
+        MallShop shop("Test Shop", "Retail", 100.0, 1000.0);
+        bool passed = shop.isVacant() && 
+                     shop.calculateMonthlyRevenue() == -1000.0;
+        printTestResult("Mall Shop Creation", passed);
+    }
+```
+
+## Industrial Unit Testing
+  **Test Cases**:
+  1. Basic factory tests (creation and construction)
+  2. Worker management tests
+  3. Production cycle tests
+  4. Maintenance tracking and repair tests
+  5. Job allocation tests
+```c++
+    static void printTestResult(const std::string& testName, bool passed) {
+        std::cout << (passed ? "[PASS] " : "[FAIL] ") << testName << std::endl;
+    }
+
+    // Basic Factory Tests
+    static void testFactoryCreation() {
+        MaterialHub* hub = new SteelBuilder();  // Changed from MaterialHub to SteelBuilder
+        Factories factory(hub, "Test Factory");
+        bool passed = !factory.isFactoryOperational() && 
+                     factory.getNumberOfWorkers() == 0 &&
+                     factory.getMaintenanceCount() == 0;
+        printTestResult("Factory Creation", passed);
+    }
+```
     
   
