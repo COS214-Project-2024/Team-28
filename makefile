@@ -35,7 +35,7 @@ $(EXEC): $(OBJECTS)
 
 # Clean up build artifacts
 clean:
-	del *.o main.exe program.exe
+	rm -f *.o program
 
 # Run the program
 run: $(EXEC)
