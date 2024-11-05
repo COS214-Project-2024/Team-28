@@ -175,6 +175,7 @@ int main() {
             int numberOfUnits = std::stoi(req.get_param_value("units"));
             Estate *estate = new Estate(builingAddress, numberOfUnits, numberOfResidents);
         }
+        res.set_header("Access-Control-Allow-Origin", "*");
 
     });
 
@@ -194,9 +195,11 @@ int main() {
             response += "Dependent created: \n";
         }        
         response += "Citizen created \n";
-        res.set_content(response, "text/plain");
+        res.set_content(response, "text/html");
         res.set_header("Access-Control-Allow-Origin", "*");
     });
+
+    server.set_mount_point("/images", "./images");
 
     std::cout << "City Sim Server is running at http://localhost:8080" << std::endl;
     server.listen("localhost", 8080);

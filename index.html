@@ -21,6 +21,11 @@
             justify-content: center;
             font-size: 24px;
         }
+        .building-icon img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
     </style>
     <script>
         async function fetchWelcomeMessage() {
@@ -33,6 +38,22 @@
             const response = await fetch('http://localhost:8080/buildings');
             const text = await response.text();
             document.getElementById('building-types').innerText = text;
+        }
+
+        async function createCitizen() {
+            const type = document.getElementById('citizen-type').value;
+            const income = document.getElementById('citizen-income').value;
+            const hasHouse = document.getElementById('citizen-has-house').checked;
+            const response = await fetch('http://localhost:8080/citizens/create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `worker=${type}&income=${income}&hasHouse=${hasHouse}`
+            });
+            const text = await response.text();
+            document.getElementById('create-citizen-response').innerText = text;
+            addCitizenIcon();
         }
 
         async function createResidentialBuilding() {
@@ -64,8 +85,25 @@
             const container = document.getElementById('building-container');
             const icon = document.createElement('div');
             icon.className = 'building-icon';
-            icon.innerText = type[0]; // Use the first letter of the building type as the icon
+            const img = document.createElement('img');
+            img.src = getBuildingIconUrl(type);
+            icon.appendChild(img);
             container.appendChild(icon);
+        }
+
+        function getBuildingIconUrl(type) {
+            switch (type) {
+                case 'House':
+                    return 'images/house.png';
+                case 'Town House':
+                    return 'images/townhouse.png';
+                case 'Flat':
+                    return 'images/flat.png';
+                case 'Estate':
+                    return 'images/estate.png';
+                default:
+                    return 'images/default.png';
+            }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -79,6 +117,27 @@
     <div id="welcome-message"></div>
     <h2>Building Types</h2>
     <div id="building-types"></div>
+
+    <h2>Create Citizen</h2>
+    <form onsubmit="event.preventDefault(); createCitizen();">
+        <label for="citizen-type">Type:</label>
+        <select id="citizen-type">
+            <option value="Worker">Worker</option>
+            <option value="Dependent">Dependent</option>
+        </select>
+        <br>
+        <label for="citizen-income">Income:</label>
+        <input type="text" id="citizen-income" required>
+        <br>
+        <label for="citizen-has-house">Has House:</label>
+        <input type="checkbox" id="citizen-has-house">
+        <br>
+        <button type="submit">Create Citizen</button>
+    </form>
+    <div id="create-citizen-response"></div>
+    <h2>Citizens</h2>
+    <div id="citizen-container" class="citizen-container"></div>
+
     <h2>Create Residential Building</h2>
     <form onsubmit="event.preventDefault(); createResidentialBuilding();">
         <label for="building-type">Type:</label>
@@ -101,8 +160,6 @@
         <button type="submit">Create Building</button>
     </form>
     <div id="create-building-response"></div>
-    <h2>Citizens</h2>
-    <div id="citizen-container" class="citizen-container"></div>
     <h2>Buildings</h2>
     <div id="building-container" class="building-container"></div>
 </body>
