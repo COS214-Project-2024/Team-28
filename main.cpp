@@ -167,7 +167,9 @@ int main() {
             TownHouse *townHouse = new TownHouse(builingAddress, numberOfResidents);
         }
         else if(type=="Flat"){
-
+            std::string builingAddress = req.get_param_value("address");
+            int numberOfResidents = std::stoi(req.get_param_value("residents"));
+            Flat *flat = new Flat(builingAddress, numberOfResidents);
         }
         else if(type=="Estate"){
             std::string builingAddress = req.get_param_value("address");
@@ -177,6 +179,33 @@ int main() {
         }
         res.set_header("Access-Control-Allow-Origin", "*");
 
+    });
+
+    server.Post("/buildings/commercial/create", [](const httplib::Request& req, httplib::Response& res) {
+        std::string response = "Creating Building...\n";
+        std::string type = req.get_param_value("type");
+        if(type=="Shop"){
+            std::string shopName = req.get_param_value("name");
+            std::string shopType = req.get_param_value("type");
+            double shopRevenue = std::stod(req.get_param_value("revenue"));
+            double shopOperatingCosts = std::stod(req.get_param_value("operatingCosts"));
+            MallShop *shop = new MallShop(shopName, shopType, shopRevenue, shopOperatingCosts);
+        }
+        else if(type=="Office"){
+            std::string officeName = req.get_param_value("name");
+            std::string OfficeAddress = req.get_param_value("Addresss");
+            std::string CompanyType = req.get_param_value("type");
+            int officesize = std::stoi(req.get_param_value("revenue"));
+            double officeBuildingCosts = std::stod(req.get_param_value("operatingCosts"));
+            Office *office = new Office(officeName, OfficeAddress, CompanyType, officesize);
+        }
+        else if(type=="Mall"){
+            std::string mallName = req.get_param_value("name");
+            std::string mallAddress = req.get_param_value("address");
+            int maxCapacity = std::stoi(req.get_param_value("capacity"));
+            Mall *mall = new Mall(mallName, mallAddress, maxCapacity);
+        }
+        res.set_header("Access-Control-Allow-Origin", "*");
     });
 
     server.Post("/citizens/create", [&government, &citizens](const httplib::Request& req, httplib::Response& res) {
@@ -194,6 +223,7 @@ int main() {
             citizens.push_back(dependent);
             response += "Dependent created: \n";
         }        
+        government.setCitizens(citizens);
         response += "Citizen created \n";
         res.set_content(response, "text/html");
         res.set_header("Access-Control-Allow-Origin", "*");
